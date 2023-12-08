@@ -1,0 +1,5 @@
+administrador:
+-alias:admin
+-contraseña:1234
+
+usuario:

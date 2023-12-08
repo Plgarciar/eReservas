@@ -1,0 +1,415 @@
+/* *{
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    background: rgb(34,193,195);
+    background: radial-gradient(circle, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+nav{
+    color: white;
+    text-align: center;
+    justify-content: center;
+}
+
+nav ul{ 
+    background: #405d27;
+    list-style-type: none; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav img{
+    height: 30px;
+    width: 30px;
+    border-radius: 70px;
+} 
+
+.dropdownmenu ul, .dropdownmenu li {
+	margin: 0;
+	padding: 0;
+}
+
+.dropdownmenu ul {
+	width: 100%;
+}
+
+.dropdownmenu li {
+	float: left;
+	position: relative;
+	width:auto;
+    text-decoration: none;
+}
+
+.dropdownmenu a {
+	background: #405d27;
+	color: #FFFFFF;
+	display: block;
+	padding: 10px 25px;
+	text-align: center;
+	text-decoration: none;
+    list-style-type: none;
+}
+
+.dropdownmenu li:hover a{
+    padding: 10px 25px;
+	background: #000000;
+}
+
+#submenu, #submenu2 {
+	left: 0;
+	opacity: 0;
+	position: absolute;
+	top: 35px;
+	visibility: hidden;
+	z-index: 1;
+    display: block;
+}
+
+li:hover ul#submenu {
+	opacity: 1;
+	visibility: visible;
+}
+
+li:hover ul#submenu2 {
+	opacity: 1;
+	top: 50px;
+	visibility: visible;
+}
+
+#submenu li, #submenu2 li {
+	float: none;
+	width: 100%;
+}
+
+#submenu a:hover, #submenu2 a:hover {
+	background: #b9420b;
+    
+}
+
+#submenu a, #submenu2 a {
+	background:#000000;
+}
+
+main p{
+    text-align: center;
+    font-size: 18px;
+}
+
+main h2{
+    text-align: center;
+}
+
+main img{
+    margin: auto;
+    border-radius: 40px;
+    width: 60px;
+    height: 60px;
+    border: 1px solid transparent;
+}
+
+.da{
+    pointer-events: none;
+}
+
+table{
+    border-collapse: collapse;
+    padding: 5em auto;
+    margin: 2em auto;
+}
+
+table a{
+    color: white;
+    text-decoration: none;
+}
+
+table a:hover{
+    color: darkgreen;
+    text-decoration: underline;
+}
+
+caption, th{
+    background-color: #686256;
+    color: white;
+    border:1px solid white;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+table, th, td{
+    border:1px solid white;
+}
+
+th{
+    text-align: center;
+    padding: .5em;
+    border:1px solid white;
+}
+
+td{
+    background-color: #d4ac6e;
+    color: white;
+    padding: .2em;
+    text-align: center;
+    font-size: 1.2em;
+} 
+
+table img{
+    height: 80px;
+    width: 80px;
+}
+
+table p{
+    font-size: 1.5em;
+}
+
+input[type="submit"], #enlaceVolver{
+    text-align: center;
+    color: white;
+    text-decoration: none;
+    background-color: darkgreen;
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: .8em;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+#enlaceVolver{
+    display: inline-block;
+    margin: 1% 50% 1%;
+    /* margin-bottom: 10px;
+    margin-top: 50px; *//*
+}
+
+.paginacion{
+    width: fit-content;
+    margin: 20px auto;
+}
+
+.paginacion a{
+    text-decoration: none;
+    background-color: #405d27;
+    color: white;
+    padding: 1em
+}
+
+.paginacion a:hover{
+    background-color: white;
+    color: #405d27;
+}
+
+#inicioUsuario{
+    width: 50%;
+    margin: auto;
+    border: 2px solid white;
+    border-radius: 10px;
+    background-color: rgba(180, 180, 180, 0.8);
+}
+
+#inicioUsuario img{
+    width: 400px;
+    height: 400px;
+    margin: 0 30%;
+}
+
+#inicioUsuario span{
+    color: darkmagenta;
+}
+
+#inicioUsuario p, h2{
+    padding: .5em 0;
+}
+
+#formLogin, #formCodigo, #formNombre{
+    color: white;
+    width: 30%;
+    margin: 2em auto;
+    background-color: rgba(180, 180, 180, 0.8);
+    padding: 2em;
+    border-radius: 2em;
+    text-align: center;
+}
+
+form input[type="submit"]{
+    padding:.5em;
+    border-radius: .5em;
+}
+
+#formLogin h2{
+    padding-bottom: 1em;
+}
+
+#formLogin label{
+    padding-bottom: 1em;
+}
+
+#formLogin input[type="submit"]{
+    margin: 0 45%;
+}
+
+fieldset{
+    width: 60%;
+    margin: 1em auto;
+    padding: 1.2em;
+}
+
+fieldset input[type="submit"]{
+    margin: 20px auto 0;
+}
+
+legend{
+    margin: 0 auto;
+    font-weight: bold;
+}
+
+.fondo{
+    background: url("../../recursos/imagenes/alimentos.avif");
+    background-size: cover;
+    height:  85vh;
+    background-position: center top;
+}
+
+.sinFondo{
+    background: url("../../recursos/imagenes/fondo_paginas2.jpg");
+    background-size: cover;
+    background-position: center top;
+    padding: 1em 0;
+    /* height:  100vh; */
+   /* height:  fit-content;
+}
+
+.sinFondo p{
+    text-align: center;
+    color: white;
+    font-weight: bold;
+}
+
+footer{
+    background-color: 405d27;
+    height: 4em;
+}
+
+footer p{
+    color: white;
+    text-align: center;
+    padding-top: 1em;
+}*/
+
+*{
+    padding: 0;
+    margin: 0;
+}
+
+/*pagina inicio*/
+body{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+main{
+    margin: auto;
+    height: fit-content;
+    /* background-image: url("../../recursos/imagenes/fondo_inicio.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center; */
+}
+
+
+nav img{
+    width: auto;
+    height: 9vh;
+    /* width: 180px;
+    height: 80px; */
+}
+
+nav ul{
+    display: flex;
+    align-items: center;
+    padding: 1.25em;
+}
+
+nav>ul li{
+    display: inline;
+    position: relative;
+}
+
+li a{
+    color: rgba(0,0,0,.6);
+    font-weight: bold;
+    text-decoration: none;
+    padding: 0 .5em 0 ;
+}
+
+li:nth-child(1){
+    margin-right: auto;
+}
+
+li a:hover{
+    text-decoration: underline;
+}
+
+.errores{
+    color: red;
+    text-align: center;
+    width: 60%;
+    margin: 0 auto 2em;
+} 
+
+footer{
+    margin-top: 40%;
+    color: #059e63;
+}
+
+footer p{
+    text-align: center;
+    padding: 2em;
+}
+
+/* .contenedor{
+    margin: 50% auto;
+    border: 2px solid gray;
+    box-shadow: 5px 5px 5px 2px gray ;
+    background-color: white;
+}
+
+main{
+    padding-bottom: 1px;
+}
+
+form{
+    margin: 30px auto;
+    text-align: center;
+}
+
+label{
+    padding: 0px 30px;
+}
+
+input[type="submit"]{
+    font-size: 18px;
+    margin: 10px auto; 
+    font-family: inherit;
+    background-color: rgba(34,193,195,1);
+    color:white;
+    padding: 8px;
+    border: 1px solid gray;
+}
+
+input[type="submit"]:hover{
+    background-color:white;
+    color:rgba(34,193,195,1);
+    cursor: pointer;
+}
+
+input[type="text"], input[type="password"], input[type="email"]{
+    width: 150px;
+    float: right;
+    margin-right: 30px;
+}*/
+
+
