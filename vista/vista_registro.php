@@ -2,6 +2,9 @@
 
 <div class="sinFondo">
     <form action="index.php?ctl=registro" method="POST">
+        <label>DNI:</label>
+        <input type="text" name="dni" id="dni" value="<?= isset($_REQUEST['dni']) ? $_REQUEST['dni'] : "" ?>"/>
+        <br><br>
         <label>Nombre</label>
         <input type="text" name="nombre" id="nombre" value="<?= isset($_REQUEST['nombre']) ? $_REQUEST['nombre'] : "" ?>"/>
         <br><br>

@@ -12,81 +12,112 @@
             include ('vista/vista_login.php');
         }
 
-        // public static function comprobarEmail(){
-        //     filtrar($_REQUEST);
+        public static function comprobarDni(){
+            filtrar($_REQUEST);
            
-        //     $datos=Usuarios::existeEmail($_REQUEST['email']);
-        //     if(count($datos)>0){
-        //         return false; //existe el email en la base de datos
-        //     }else{
-        //         return true;//no existe el email en la base de datos
-        //     }
-        // }
-
-        // public static function comprobarAlias(){
-        //     filtrar($_REQUEST);
+            $datos=Usuarios::existeDni($_REQUEST['dni']);
+            if(count($datos)>0){
+                return false; //existe el dni en la base de datos
+            }else{
+                return true;//no existe el dni en la base de datos
+            }
+        }
+       
+        public static function comprobarEmail(){
+            filtrar($_REQUEST);
            
-        //     $datos=Usuarios::existeAlias($_REQUEST['alias']);
-        //     if(count($datos)>0){
-        //         return false; //existe el alias en la base de datos
-        //     }else{
-        //         return true;//no existe el alias en la base de datos
-        //     }
-        // }
+            $datos=Usuarios::existeEmail($_REQUEST['email']);
+            if(count($datos)>0){
+                return false; //existe el email en la base de datos
+            }else{
+                return true;//no existe el email en la base de datos
+            }
+        }
 
-        // public function registro(){
-        //     if(isset($_REQUEST['registro'])){
-        //         filtrar($_REQUEST);
+        public static function comprobarAlias(){
+            filtrar($_REQUEST);
+           
+            $datos=Usuarios::existeAlias($_REQUEST['alias']);
+            if(count($datos)>0){
+                return false; //existe el alias en la base de datos
+            }else{
+                return true;//no existe el alias en la base de datos
+            }
+        }
 
-        //         if(isset($_REQUEST['nombre']) && $_REQUEST['nombre']!= "" && isset($_REQUEST['email']) && $_REQUEST['email']!= ""
-        //         && isset($_REQUEST['alias']) && $_REQUEST['alias']!= "" && isset($_REQUEST['clave']) && $_REQUEST['clave']!= "" ){
-        //             if(mb_strlen($_REQUEST['nombre']) <= 50){
-        //                 if(!is_numeric($_REQUEST['nombre'])){
-        //                     $nombre_ok=true;
-        //                 }else{
-        //                     $error=3;
-        //                 }
-        //             }else{
-        //                 $error=2;
-        //             }
+        public function registro(){
+            if(isset($_REQUEST['registro'])){
+                filtrar($_REQUEST);
+
+                if(isset($_REQUEST['dni']) && $_REQUEST['dni']!= "" && isset($_REQUEST['nombre']) && $_REQUEST['nombre']!= "" && isset($_REQUEST['email']) && $_REQUEST['email']!= ""
+                && isset($_REQUEST['alias']) && $_REQUEST['alias']!= "" && isset($_REQUEST['clave']) && $_REQUEST['clave']!= "" ){
                     
-        //             if(mb_strlen($_REQUEST['email']) <= 50){
-        //                 if(filter_var($_REQUEST['email'], FILTER_VALIDATE_EMAIL)){
-        //                     if(ControladorInicio::comprobarEmail()){
-        //                         $email_ok=true;
-        //                     }else{
-        //                         $error=6;
-        //                     }
-        //                 }else{
-        //                     $error=5;
-        //                 }
-        //             }else{
-        //                 $error=4;
-        //             }
+                    //expresion regular para dni cif y nie
+                    if(mb_strlen($_REQUEST['dni']) <= 20){
+                        if(ControladorInicio::comprobarDni()){
+                            $dni_ok=true;
+                        }else{
+                            $error=13;
+                        }
+                    }else{
+                        $error=7;
+                    }
 
-        //             if(mb_strlen($_REQUEST['alias']) <= 20){
-        //                 if(ControladorInicio::comprobarAlias()){
-        //                     $alias_ok=true;
-        //                 }else{
-        //                     $error=8;
-        //                 }
-        //             }else{
-        //                 $error=7;
-        //             }
+                    if(filter_var($_REQUEST['dni'], FILTER_VALIDATE_REGEXP)){
+                        
+                    }
+
+
+                    //compruebo el nombre
+                    if(mb_strlen($_REQUEST['nombre']) <= 50){
+                        if(!is_numeric($_REQUEST['nombre'])){
+                            $nombre_ok=true;
+                        }else{
+                            $error=3;
+                        }
+                    }else{
+                        $error=2;
+                    }
                     
-        //             if(isset($nombre_ok) && isset($email_ok) && isset($alias_ok)){
-        //                 $usuario= new Usuarios();
-        //                 $clave_hash=password_hash($_REQUEST['clave'], PASSWORD_DEFAULT);
-        //                 $usuario->registroUsuario($_REQUEST['nombre'], $_REQUEST['email'], $_REQUEST['alias'],$clave_hash);
-        //                 $error=9;
-        //                 $_REQUEST="";
-        //             }
-        //         }else{
-        //             $error=10;
-        //         }
-        //     }
-        //     include ('vista/vista_registro.php');
-        // }
+                    //compruebo el email
+                    if(mb_strlen($_REQUEST['email']) <= 50){
+                        if(filter_var($_REQUEST['email'], FILTER_VALIDATE_EMAIL)){
+                            if(ControladorInicio::comprobarEmail()){
+                                $email_ok=true;
+                            }else{
+                                $error=6;
+                            }
+                        }else{
+                            $error=5;
+                        }
+                    }else{
+                        $error=4;
+                    }
+
+                    //compruebo el alias
+                    if(mb_strlen($_REQUEST['alias']) <= 20){
+                        if(ControladorInicio::comprobarAlias()){
+                            $alias_ok=true;
+                        }else{
+                            $error=8;
+                        }
+                    }else{
+                        $error=7;
+                    }
+                    
+                    if(isset($dni_ok) && isset($nombre_ok) && isset($email_ok) && isset($alias_ok)){
+                        $usuario= new Usuarios();
+                        $clave_hash=password_hash($_REQUEST['clave'], PASSWORD_DEFAULT);
+                        $usuario->registroUsuario($_REQUEST['dni'],$_REQUEST['nombre'], $_REQUEST['email'], $_REQUEST['alias'],$clave_hash);
+                        $error=9;
+                        $_REQUEST="";
+                    }
+                }else{
+                    $error=10;
+                }
+            }
+            include ('vista/vista_registro.php');
+        }
         
         public function validar(){ 
             filtrar($_REQUEST);
@@ -110,10 +141,6 @@
                 include_once ('vista/vista_login.php');
             }
         }
-
-        // public function usuario(){ 
-        //     include ('vista/vista_usuario.php');
-        // }
 
         // public function modificarDatos(){
             
@@ -144,11 +171,11 @@
             
         // }
 
-        // public function logout(){
-        //     $_SESSION = array();
-        //     setcookie(session_name(), null, time() - 99999, '/');
-        //     session_destroy();
-        //     header("location:index.php?ctl=login");
-        // }
+        public function logout(){
+            $_SESSION = array();
+            setcookie(session_name(), null, time() - 99999, '/');
+            session_destroy();
+            header("location:index.php?ctl=home");
+        }
         
     }

@@ -11,7 +11,7 @@
 
     <body>
         <nav>
-            <ul>
+            <ul id="menu">
                 <li><a href="index.php?ctl=home"><img src="./recursos/imagenes/ayto-calvarrasa-3.png"></a></li>
                 <li><a href="index.php?ctl=home">Inicio</a></li>
                 <li><a href="index.php?ctl=instalaciones">Instalaciones</a></li>
@@ -20,16 +20,24 @@
                 <li><a href="index.php?ctl=registro">Registro</a></li>
                 <li><a href="index.php?ctl=login">Iniciar sesión</a></li>
                 <?php } else if($_SESSION['perfil_usuario']=="usuario"){ ?>
-                <li><a href="index.php?ctl=registro">Reservas</a></li>
+                <li><a href="index.php?ctl=reservas">Reservas</a></li>
                 <li><a href="index.php?ctl=contacto">Contacto</a></li>
-                <li><a href="index.php?ctl=login">Mi cuenta</a></li>
-                <!-- falta poner dentro de mi cuenta: mis datos, mis reservas, cerrar sesion -->
+                <li><a href="#">Mi cuenta</a>
+                    <ul class="submenu">
+                        <li><a href="index.php?ctl=modificarDatos">Mis datos</a></li>
+                        <li><a href="index.php?ctl=reservasUsuario">Mis reservas</a></li>
+                        <li><a href="index.php?ctl=logout">Cerrar sesión</a></li>
+                     </ul>
+                </li>
+               
                 <?php } else if($_SESSION['perfil_usuario']=="administrador"){?>
-                <li><a href="index.php?ctl=registro">Reservas</a></li>
+                <li><a href="index.php?ctl=reservas">Reservas</a></li>
                 <li><a href="index.php?ctl=contacto">Operaciones</a></li>
-                <li><a href="index.php?ctl=login">Mi cuenta</a></li>
-                 <!-- falta poner dentro de mi cuenta: mis datos, cerrar sesion -->
-                <?php  } ?>
+                <li><a href="#">Mi cuenta</a>
+                    <li class="submenu"><a href="index.php?ctl=modificarDatos">Mis datos</a></li>
+                    <li class="submenu"><a href="index.php?ctl=logout">Cerrar sesión</a></li>
+                </li>
+                <?php  } ;?>
             </ul>
         </nav>
 

@@ -313,27 +313,21 @@ body{
 main{
     margin: auto;
     height: fit-content;
-    /* background-image: url("../../recursos/imagenes/fondo_inicio.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center; */
 }
 
 
 nav img{
     width: auto;
     height: 9vh;
-    /* width: 180px;
-    height: 80px; */
 }
 
-nav ul{
+nav ul#menu{
     display: flex;
     align-items: center;
     padding: 1.25em;
 }
 
-nav>ul li{
+nav>ul#menu li{
     display: inline;
     position: relative;
 }
@@ -351,6 +345,29 @@ li:nth-child(1){
 
 li a:hover{
     text-decoration: underline;
+}
+
+li:last-child{
+    position: relative;
+    display: inline-block;
+}
+
+.submenu{
+    display: none;
+    position: absolute;
+}
+
+.submenu li a{
+    display: block;
+}
+
+li:last-child:hover .submenu {
+    display: block;
+}
+
+.submenu li a:hover{
+    color: darkblue;
+    text-decoration: none;
 }
 
 .errores{
