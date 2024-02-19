@@ -3,3 +3,5 @@ administrador:
 -contraseña:1234
 
 usuario:
+-alias:pepe
+-contraseña:1234

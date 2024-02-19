@@ -2,7 +2,7 @@
 class Config
 {
     static public $host = 'localhost';
-    static public $database  = 'pueblo';
+    static public $database  = 'pueblo_datos';
     static public $username = 'root';
     static public $password    = '';
     static public $charset    = 'utf8mb4';

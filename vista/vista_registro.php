@@ -5,7 +5,7 @@
         <label>DNI:</label>
         <input type="text" name="dni" id="dni" value="<?= isset($_REQUEST['dni']) ? $_REQUEST['dni'] : "" ?>"/>
         <br><br>
-        <label>Nombre</label>
+        <label>Nombre completo</label>
         <input type="text" name="nombre" id="nombre" value="<?= isset($_REQUEST['nombre']) ? $_REQUEST['nombre'] : "" ?>"/>
         <br><br>
         <label>Correo electrónico</label>

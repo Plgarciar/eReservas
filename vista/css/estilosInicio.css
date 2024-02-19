@@ -332,22 +332,23 @@ nav>ul#menu li{
     position: relative;
 }
 
-li a{
+nav li a{
     color: rgba(0,0,0,.6);
     font-weight: bold;
     text-decoration: none;
     padding: 0 .5em 0 ;
 }
 
-li:nth-child(1){
+nav li:nth-child(1){
     margin-right: auto;
 }
 
-li a:hover{
+nav li a:hover{
     text-decoration: underline;
+    color: darkblue;
 }
 
-li:last-child{
+nav li:last-child{
     position: relative;
     display: inline-block;
 }
@@ -361,13 +362,22 @@ li:last-child{
     display: block;
 }
 
-li:last-child:hover .submenu {
+nav li:last-child:hover .submenu {
     display: block;
 }
 
 .submenu li a:hover{
     color: darkblue;
     text-decoration: none;
+}
+
+#formLogin{
+    margin: auto;
+    width: fit-content;
+}
+
+#formLogin label{
+    width: 200px;
 }
 
 .errores{
@@ -377,15 +387,44 @@ li:last-child:hover .submenu {
     margin: 0 auto 2em;
 } 
 
-footer{
-    margin-top: 40%;
-    color: #059e63;
+.contenedorInstalaciones{
+    display: flex;
+    justify-content: center;
+    margin: 1.5em;
 }
 
-footer p{
-    text-align: center;
-    padding: 2em;
+.instalacion{
+    border: 2px solid gray;
+    box-shadow: 2px 2px gray;
+    width: 20%;
+    margin: 1.5em;
 }
+
+footer{
+    margin-top: 40%;
+    background-color: #333333;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+footer div{
+    padding: 5em;
+    /* width: 15%; */
+}
+
+footer a{
+    color: white;
+}
+
+footer a:hover{
+    color: #006FB8;
+}
+
+footer li{
+    margin-left: 1em ;
+}
+
 
 /* .contenedor{
     margin: 50% auto;

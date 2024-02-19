@@ -6,7 +6,7 @@ class Usuarios{
 
     public function registroUsuario($dni,$nombre,$email,$alias,$clave){
         try{
-            $sql = "INSERT INTO usuarios (dni_usuario,nombre_usuario,email_usuario,alias_usuario,password_usuario) VALUES (?,?,?,?,?)";
+            $sql = "INSERT INTO usuarios (dni,nombre,email,alias,clave) VALUES (?,?,?,?,?)";
             $consulta = Conectar::conexion()->prepare($sql);
             $consulta->bindParam(1, $dni);
             $consulta->bindParam(2, $nombre);
@@ -23,7 +23,7 @@ class Usuarios{
 
      public static function existeDni($dni){
         try{
-            $sql = "SELECT dni_usuario FROM usuarios WHERE dni_usuario LIKE ?" ;
+            $sql = "SELECT dni FROM usuarios WHERE dni LIKE ?" ;
             $consulta = Conectar::conexion()->prepare($sql);
             $consulta->bindParam(1, $dni);
             $resultado = $consulta->execute();
@@ -39,7 +39,7 @@ class Usuarios{
 
     public static function existeEmail($email){
         try{
-            $sql = "SELECT email_usuario FROM usuarios WHERE email_usuario LIKE ?" ;
+            $sql = "SELECT email FROM usuarios WHERE email LIKE ?" ;
             $consulta = Conectar::conexion()->prepare($sql);
             $consulta->bindParam(1, $email);
             $resultado = $consulta->execute();
@@ -54,7 +54,7 @@ class Usuarios{
 
     public static function existeAlias($alias){
         try{
-            $sql = "SELECT alias_usuario FROM usuarios WHERE alias_usuario LIKE ?" ;
+            $sql = "SELECT alias FROM usuarios WHERE alias LIKE ?" ;
             $consulta = Conectar::conexion()->prepare($sql);
             $consulta->bindParam(1, $alias);
             $resultado = $consulta->execute();
@@ -70,24 +70,24 @@ class Usuarios{
        
     public static function validarUsuario($alias, $clave){
         try{
-            $sql = "SELECT * FROM usuarios WHERE alias_usuario = ?" ;
+            $sql = "SELECT * FROM usuarios WHERE alias = ?" ;
             $consulta = Conectar::conexion()->prepare($sql);
             $consulta->bindParam(1, $alias);
             $usuario = $consulta->execute();
             $usuario = $consulta->fetch(PDO::FETCH_ASSOC);
             
             if($usuario){
-                if(password_verify($clave, $usuario['password_usuario'])){
-                    $_SESSION['id_usuario']=$usuario['id_usuario'];
-                    $_SESSION['dni_usuario']=$usuario['dni_usuario'];
-                    $_SESSION['nombre_usuario']=$usuario['nombre_usuario'];
-                    $_SESSION['email_usuario']=$usuario['email_usuario'];
-                    $_SESSION['alias_usuario']=$usuario['alias_usuario'];
-                    $_SESSION['password_usuario']=$usuario['password_usuario'];
-                    $_SESSION['perfil_usuario']=$usuario['perfil_usuario'];
-                    // $_SESSION['password_usuario']=$clave;
+                if(password_verify($clave, $usuario['clave'])){
+                    $_SESSION['id_usuario']=$usuario['id'];
+                    $_SESSION['dni_usuario']=$usuario['dni'];
+                    $_SESSION['nombre_usuario']=$usuario['nombre'];
+                    $_SESSION['email_usuario']=$usuario['email'];
+                    $_SESSION['alias_usuario']=$usuario['alias'];
+                    $_SESSION['password_usuario']=$usuario['clave'];
+                    $_SESSION['perfil_usuario']=$usuario['perfil'];
+                    // $_SESSION['clave']=$clave;
                 }
-                return password_verify($clave, $usuario['password_usuario']);
+                return password_verify($clave, $usuario['clave']);
                 
             }
 

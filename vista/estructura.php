@@ -34,8 +34,10 @@
                 <li><a href="index.php?ctl=reservas">Reservas</a></li>
                 <li><a href="index.php?ctl=contacto">Operaciones</a></li>
                 <li><a href="#">Mi cuenta</a>
-                    <li class="submenu"><a href="index.php?ctl=modificarDatos">Mis datos</a></li>
-                    <li class="submenu"><a href="index.php?ctl=logout">Cerrar sesión</a></li>
+                    <ul class="submenu">
+                        <li><a href="index.php?ctl=modificarDatos">Mis datos</a></li>
+                        <li><a href="index.php?ctl=logout">Cerrar sesión</a></li>
+                    </ul>
                 </li>
                 <?php  } ;?>
             </ul>
@@ -48,7 +50,25 @@
         </main> 
         
         <footer>
-            <p>Pie de la página</p>
+            <div>
+                <h3>Contacto</h3>
+                <p>Teléfono: <a href="tel:923306024">923306024</a></p>
+                <p>Email: <a href="mailto:cultura@calvarrasadeabajo.es">cultura@calvarrasadeabajo.es</a></p>
+
+            </div>
+            <div>
+               <h3>Dirección</h3>
+               <p>Plaza Mayor, s/n 37181<br>
+               Calvarrasa de Abajo, Salamanca</p>
+            </div>
+            <div>
+                <h3>Enlaces de interés</h3>
+                <ul id="listaPie">
+                    <li><a href="https://calvarrasadeabajo.es/aviso-legal/">Aviso legal</a></li>
+                    <li><a href="https://calvarrasadeabajo.es/politica-de-privacidad/">Política de privacidad</a></li>
+                    <li><a href="https://calvarrasadeabajo.es/politica-de-cookies/">Política de cookies</a></li>
+                </ul>
+            </div>
         </footer>
     </body>
 </html>

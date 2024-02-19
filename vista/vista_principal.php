@@ -1,7 +1,7 @@
-<?php ob_start(); var_dump($_SESSION)?>
+<?php ob_start(); ?>
 
 <div class="sinFondo">
-    <p>posicion global</p>
+    <p>pagina principal</p>
 </div>
 
 <?php if($_REQUEST['ctl']=="inicio"){

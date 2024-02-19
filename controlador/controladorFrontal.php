@@ -13,30 +13,38 @@ $map=array(
         'action' => 'home', //nombre del método de esa clase
     ),
     'login' => array(
-        'controller' => 'ControladorInicio',//nombre del controlador (nombre de la clase)
-        'action' => 'login', //nombre del método de esa clase
+        'controller' => 'ControladorInicio',
+        'action' => 'login', 
     ),
     'registro' => array(
-        'controller' => 'ControladorInicio',//nombre del controlador (nombre de la clase)
-        'action' => 'registro', //nombre del método de esa clase
+        'controller' => 'ControladorInicio',
+        'action' => 'registro', 
     ),
     'validar' => array(
-        'controller' => 'ControladorInicio',//nombre del controlador (nombre de la clase)
-        'action' => 'validar', //nombre del método de esa clase
+        'controller' => 'ControladorInicio',
+        'action' => 'validar', 
     ),
     'modificarDatos' => array(
-        'controller' => 'ControladorInicio',//nombre del controlador (nombre de la clase)
-        'action' => 'modificarDatos', //nombre del método de esa clase
+        'controller' => 'ControladorInicio',
+        'action' => 'modificarDatos',
     ),
     'logout' => array(
-        'controller' => 'ControladorInicio',//nombre del controlador (nombre de la clase)
-        'action' => 'logout', //nombre del método de esa clase
+        'controller' => 'ControladorInicio',
+        'action' => 'logout', 
     ),
 
-
     'inicio' => array(
-        'controller' => 'ControladorReservas',//nombre del controlador (nombre de la clase)
-        'action' => 'inicio', //nombre del método de esa clase
+        'controller' => 'ControladorReservas',
+        'action' => 'inicio', 
+    ),
+    'instalaciones' => array(
+        'controller' => 'ControladorReservas',
+        'action' => 'instalaciones', 
+    ),
+    
+    'contacto' => array(
+        'controller' => 'ControladorReservas',
+        'action' => 'contacto', 
     ),
    
 

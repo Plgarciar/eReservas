@@ -52,23 +52,25 @@
                 if(isset($_REQUEST['dni']) && $_REQUEST['dni']!= "" && isset($_REQUEST['nombre']) && $_REQUEST['nombre']!= "" && isset($_REQUEST['email']) && $_REQUEST['email']!= ""
                 && isset($_REQUEST['alias']) && $_REQUEST['alias']!= "" && isset($_REQUEST['clave']) && $_REQUEST['clave']!= "" ){
                     
-                    //expresion regular para dni cif y nie
-                    if(mb_strlen($_REQUEST['dni']) <= 20){
+                    //Compruebo que el dni no tenga mas de 10 caracteres y que concuerda con el formato de dni
+                    //Falta expresion regular para cif y nie
+                    if(mb_strlen($_REQUEST['dni']) <= 10){
                         if(ControladorInicio::comprobarDni()){
-                            $dni_ok=true;
+                            $expresionRegular = array("options"=>array("regexp"=>"/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKET]$/i"));
+
+                            if(filter_var($_REQUEST['dni'], FILTER_VALIDATE_REGEXP,$expresionRegular)) {
+                                $dni_ok=true;
+                            }else{
+                                //$error="formato de dni no valido"
+                            }
                         }else{
                             $error=13;
                         }
                     }else{
                         $error=7;
                     }
-
-                    if(filter_var($_REQUEST['dni'], FILTER_VALIDATE_REGEXP)){
-                        
-                    }
-
-
-                    //compruebo el nombre
+                             
+                    // //compruebo que el nombre no tenga mas de 50 caracteres y que no hay numeros.
                     if(mb_strlen($_REQUEST['nombre']) <= 50){
                         if(!is_numeric($_REQUEST['nombre'])){
                             $nombre_ok=true;
@@ -79,39 +81,39 @@
                         $error=2;
                     }
                     
-                    //compruebo el email
-                    if(mb_strlen($_REQUEST['email']) <= 50){
-                        if(filter_var($_REQUEST['email'], FILTER_VALIDATE_EMAIL)){
-                            if(ControladorInicio::comprobarEmail()){
-                                $email_ok=true;
-                            }else{
-                                $error=6;
-                            }
-                        }else{
-                            $error=5;
-                        }
-                    }else{
-                        $error=4;
-                    }
+                    // //compruebo el email. falta controlar que detras del punto sean 2 o 3 letras
+                    // if(mb_strlen($_REQUEST['email']) <= 50){
+                    //     if(filter_var($_REQUEST['email'], FILTER_VALIDATE_EMAIL)){
+                    //         if(ControladorInicio::comprobarEmail()){
+                    //             $email_ok=true;
+                    //         }else{
+                    //             $error=6;
+                    //         }
+                    //     }else{
+                    //         $error=5;
+                    //     }
+                    // }else{
+                    //     $error=4;
+                    // }
 
-                    //compruebo el alias
-                    if(mb_strlen($_REQUEST['alias']) <= 20){
-                        if(ControladorInicio::comprobarAlias()){
-                            $alias_ok=true;
-                        }else{
-                            $error=8;
-                        }
-                    }else{
-                        $error=7;
-                    }
+                    // //compruebo el alias. falta comprobar que empiece por letra
+                    // if(mb_strlen($_REQUEST['alias']) <= 20){
+                    //     if(ControladorInicio::comprobarAlias()){
+                    //         $alias_ok=true;
+                    //     }else{
+                    //         $error=8;
+                    //     }
+                    // }else{
+                    //     $error=7;
+                    // }
                     
-                    if(isset($dni_ok) && isset($nombre_ok) && isset($email_ok) && isset($alias_ok)){
-                        $usuario= new Usuarios();
-                        $clave_hash=password_hash($_REQUEST['clave'], PASSWORD_DEFAULT);
-                        $usuario->registroUsuario($_REQUEST['dni'],$_REQUEST['nombre'], $_REQUEST['email'], $_REQUEST['alias'],$clave_hash);
-                        $error=9;
-                        $_REQUEST="";
-                    }
+                    // if(isset($dni_ok) && isset($nombre_ok) && isset($email_ok) && isset($alias_ok)){
+                    //     $usuario= new Usuarios();
+                    //     $clave_hash=password_hash($_REQUEST['clave'], PASSWORD_DEFAULT);
+                    //     $usuario->registroUsuario($_REQUEST['dni'],$_REQUEST['nombre'], $_REQUEST['email'], $_REQUEST['alias'],$clave_hash);
+                    //     $error=9;
+                    //     $_REQUEST="";
+                    // }
                 }else{
                     $error=10;
                 }
