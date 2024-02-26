@@ -1,6 +1,6 @@
 <?php ob_start();?>
 
-<div class="sinFondo">
+
     <form action="index.php?ctl=registro" method="POST">
         <label>DNI:</label>
         <input type="text" name="dni" id="dni" value="<?= isset($_REQUEST['dni']) ? $_REQUEST['dni'] : "" ?>"/>
@@ -22,7 +22,7 @@
     <?php if(isset($error)){ ?>
         <p class="errores"><?=mostrarError($error)?></p>
     <?php ;} else {echo "";};?>
-</div>
+
 
 <?php $contenido = ob_get_clean();?>
 

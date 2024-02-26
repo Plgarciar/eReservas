@@ -32,7 +32,7 @@
                
                 <?php } else if($_SESSION['perfil_usuario']=="administrador"){?>
                 <li><a href="index.php?ctl=reservas">Reservas</a></li>
-                <li><a href="index.php?ctl=contacto">Operaciones</a></li>
+                <li><a href="index.php?ctl=operaciones">Operaciones</a></li>
                 <li><a href="#">Mi cuenta</a>
                     <ul class="submenu">
                         <li><a href="index.php?ctl=modificarDatos">Mis datos</a></li>

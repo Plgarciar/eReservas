@@ -310,26 +310,43 @@ body{
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+/*hacer variables colores*/
+
+h2{
+    color: #046fb8 ;
+    text-align: center;
+}
+
 main{
     margin: auto;
     height: fit-content;
+}
+
+nav{
+    border-bottom: 1px solid white;
+    box-shadow: 2px 2px 20px 2px lightgray;
+    width: 100%;
 }
 
 
 nav img{
     width: auto;
     height: 9vh;
+    
 }
 
 nav ul#menu{
     display: flex;
     align-items: center;
     padding: 1.25em;
+    margin-right: 2%;
+    justify-content:flex-end;
 }
 
 nav>ul#menu li{
     display: inline;
     position: relative;
+    
 }
 
 nav li a{
@@ -344,7 +361,8 @@ nav li:nth-child(1){
 }
 
 nav li a:hover{
-    text-decoration: underline;
+    animation-delay: 25s;
+    /* text-decoration: underline; */
     color: darkblue;
 }
 
@@ -360,6 +378,7 @@ nav li:last-child{
 
 .submenu li a{
     display: block;
+    width: max-content;
 }
 
 nav li:last-child:hover .submenu {
@@ -387,17 +406,59 @@ nav li:last-child:hover .submenu {
     margin: 0 auto 2em;
 } 
 
+hr{
+    color: darkblue;
+    
+}
+
 .contenedorInstalaciones{
     display: flex;
     justify-content: center;
     margin: 1.5em;
+    
 }
 
 .instalacion{
     border: 2px solid gray;
     box-shadow: 2px 2px gray;
-    width: 20%;
+    padding: 2em;
     margin: 1.5em;
+    text-align: center;
+}
+
+.instalacion p{
+    text-align: left;
+}
+
+.instalacion img{
+    width: 10em;
+    height: 10em;
+    padding-bottom: .5em;
+}
+
+/*CONTACTO */
+#formContacto{
+    width: max-content;
+    margin: auto;
+    padding: 1em;
+}
+
+#formContacto input{
+    display: block;
+    padding: .8em;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+#formContacto textarea{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    resize: none;
+    padding: .8em;
+}
+
+iframe{
+    border: 0;
+    width: 100%;
+    height: 30em;
 }
 
 footer{

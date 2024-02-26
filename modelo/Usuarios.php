@@ -4,6 +4,9 @@
 
 class Usuarios{
 
+    public $dni;
+    public $clave;
+
     public function registroUsuario($dni,$nombre,$email,$alias,$clave){
         try{
             $sql = "INSERT INTO usuarios (dni,nombre,email,alias,clave) VALUES (?,?,?,?,?)";
@@ -21,7 +24,7 @@ class Usuarios{
     }
 
 
-     public static function existeDni($dni){
+    public static function existeDni($dni){
         try{
             $sql = "SELECT dni FROM usuarios WHERE dni LIKE ?" ;
             $consulta = Conectar::conexion()->prepare($sql);

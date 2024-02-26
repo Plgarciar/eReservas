@@ -11,6 +11,7 @@
         public function instalaciones(){ 
             $instalaciones=new Instalaciones();
             $datos=$instalaciones->verInstalaciones();
+            $rutaImagen="./recursos/imagenes/";
          
             include ('vista/vista_instalaciones.php');
         } 
@@ -19,8 +20,8 @@
             include ('vista/vista_contacto.php');
         }      
         
-        public function verInstalaciones(){
+        public function reservas(){
             
-            include_once ('vista/vista_instalaciones.php');
+            include('vista/vista_reservas.php');
         }
     }

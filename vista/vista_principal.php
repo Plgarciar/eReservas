@@ -1,8 +1,8 @@
 <?php ob_start(); ?>
 
-<div class="sinFondo">
-    <p>pagina principal</p>
-</div>
+
+<h2>pagina principal</h2>
+
 
 <?php if($_REQUEST['ctl']=="inicio"){
     echo "hola";

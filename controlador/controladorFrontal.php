@@ -41,7 +41,10 @@ $map=array(
         'controller' => 'ControladorReservas',
         'action' => 'instalaciones', 
     ),
-    
+    'reservas' => array(
+        'controller' => 'ControladorReservas',
+        'action' => 'reservas', 
+    ),    
     'contacto' => array(
         'controller' => 'ControladorReservas',
         'action' => 'contacto', 
