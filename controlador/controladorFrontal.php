@@ -4,7 +4,6 @@ const DIR = [0 => "controlador/", 1 => "modelo/"];
 spl_autoload_register(function ($clase) {
     if (file_exists(DIR[0] . $clase . ".php")) require DIR[0] . $clase . ".php";
     if (file_exists(DIR[1] . $clase . ".php")) require DIR[1] . $clase . ".php";
-    // if (file_exists(DIR[2] . $clase . ".php")) require DIR[2] . $clase . ".php";
 });
 
 $map=array(
@@ -28,6 +27,10 @@ $map=array(
         'controller' => 'ControladorInicio',
         'action' => 'modificarDatos',
     ),
+    'reservasUsuario' => array(
+        'controller' => 'ControladorInicio',
+        'action' => 'reservasUsuario',
+    ),
     'logout' => array(
         'controller' => 'ControladorInicio',
         'action' => 'logout', 
@@ -45,9 +48,29 @@ $map=array(
         'controller' => 'ControladorReservas',
         'action' => 'reservas', 
     ),    
+    'reservasUsuario' => array(
+        'controller' => 'ControladorReservas',
+        'action' => 'reservasUsuario', 
+    ),    
     'contacto' => array(
         'controller' => 'ControladorReservas',
         'action' => 'contacto', 
+    ),
+    'operaciones' => array(
+        'controller' => 'ControladorReservas',
+        'action' => 'operaciones', 
+    ),
+    'gestionarInstalaciones' => array(
+        'controller' => 'ControladorReservas',
+        'action' => 'gestionarInstalaciones', 
+    ),
+    'gestionarReservas' => array(
+        'controller' => 'ControladorReservas',
+        'action' => 'gestionarReservas', 
+    ),
+    'gestionarUsuarios' => array(
+        'controller' => 'ControladorReservas',
+        'action' => 'gestionarUsuarios', 
     ),
    
 

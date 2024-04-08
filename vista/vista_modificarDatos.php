@@ -1,7 +1,7 @@
-<?php ob_start(); var_dump($_SESSION)?>
+<?php ob_start();?>
 
 
-<h2>Modificar datos de la cuenta</h2>
+<h2>Mis datos</h2>
 <form action="" method="POST" id="formularioDatos">
     <label>Nombre:</label>
     <input type="text" name="newNombre" id="" value="<?= $_SESSION['nombre_usuario']?>">

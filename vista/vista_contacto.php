@@ -1,7 +1,6 @@
 <?php ob_start();?>
 
 <h2>Contacta con nosotros</h2>
-<hr>
 
 <form action="" id="formContacto">
     <label for=""></label>

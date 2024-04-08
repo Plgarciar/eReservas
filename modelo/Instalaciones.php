@@ -1,12 +1,16 @@
 <?php
 
-// include_once("Conectar.php");
-
 class Instalaciones{
 
-   public function verInstalaciones(){
+    public $id;
+    public $nombre;
+    public $direccion;
+    public $horario;
+    public $imagen;
+
+    public function verInstalaciones(){
         try{
-            $sql = "SELECT nombre, direccion, horario, imagen FROM instalaciones" ;
+            $sql = "SELECT id, nombre, direccion, horario, imagen FROM instalaciones" ;
             $consulta = Conectar::conexion()->prepare($sql);
             $instalacion = $consulta->execute();
             $instalacion = $consulta->fetchAll(PDO::FETCH_ASSOC);

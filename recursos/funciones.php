@@ -43,10 +43,7 @@
             12=>'El nombre y/o contraseña son incorrectos',
             13=>'El dni ya existe',
             14=>'El dni no puede tener una logitud de más de 20 caracteres',
-
-            // 11=>'La contraseña actual es incorrecta',
-            // 12=>'Las contraseñas no coinciden',
-            // 13=>'Contraseña modificada correctamente',
+            15=>'Formato de DNI incorrecto',
         ];
 
         if(isset($errores[$error])){

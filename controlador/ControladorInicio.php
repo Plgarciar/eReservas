@@ -1,6 +1,5 @@
 <?php
     require_once("recursos/funciones.php");
-    // require_once("app/modelo/Usuarios.php");
 
     class ControladorInicio{
 
@@ -61,7 +60,7 @@
                             if(filter_var($_REQUEST['dni'], FILTER_VALIDATE_REGEXP,$expresionRegular)) {
                                 $dni_ok=true;
                             }else{
-                                //$error="formato de dni no valido"
+                                $error=15;
                             }
                         }else{
                             $error=13;
@@ -81,39 +80,39 @@
                         $error=2;
                     }
                     
-                    // //compruebo el email. falta controlar que detras del punto sean 2 o 3 letras
-                    // if(mb_strlen($_REQUEST['email']) <= 50){
-                    //     if(filter_var($_REQUEST['email'], FILTER_VALIDATE_EMAIL)){
-                    //         if(ControladorInicio::comprobarEmail()){
-                    //             $email_ok=true;
-                    //         }else{
-                    //             $error=6;
-                    //         }
-                    //     }else{
-                    //         $error=5;
-                    //     }
-                    // }else{
-                    //     $error=4;
-                    // }
+                    // //compruebo el email. falta controlar que detras del punto sean 2 o 3 letras y que despues del @ sean 3 o mas letras
+                    if(mb_strlen($_REQUEST['email']) <= 50){
+                        if(filter_var($_REQUEST['email'], FILTER_VALIDATE_EMAIL)){
+                            if(ControladorInicio::comprobarEmail()){
+                                $email_ok=true;
+                            }else{
+                                $error=6;
+                            }
+                        }else{
+                            $error=5;
+                        }
+                    }else{
+                        $error=4;
+                    }
 
                     // //compruebo el alias. falta comprobar que empiece por letra
-                    // if(mb_strlen($_REQUEST['alias']) <= 20){
-                    //     if(ControladorInicio::comprobarAlias()){
-                    //         $alias_ok=true;
-                    //     }else{
-                    //         $error=8;
-                    //     }
-                    // }else{
-                    //     $error=7;
-                    // }
+                    if(mb_strlen($_REQUEST['alias']) <= 20){
+                        if(ControladorInicio::comprobarAlias()){
+                            $alias_ok=true;
+                        }else{
+                            $error=8;
+                        }
+                    }else{
+                        $error=7;
+                    }
                     
-                    // if(isset($dni_ok) && isset($nombre_ok) && isset($email_ok) && isset($alias_ok)){
-                    //     $usuario= new Usuarios();
-                    //     $clave_hash=password_hash($_REQUEST['clave'], PASSWORD_DEFAULT);
-                    //     $usuario->registroUsuario($_REQUEST['dni'],$_REQUEST['nombre'], $_REQUEST['email'], $_REQUEST['alias'],$clave_hash);
-                    //     $error=9;
-                    //     $_REQUEST="";
-                    // }
+                    if(isset($dni_ok) && isset($nombre_ok) && isset($email_ok) && isset($alias_ok)){
+                        $usuario= new Usuarios();
+                        $clave_hash=password_hash($_REQUEST['clave'], PASSWORD_DEFAULT);
+                        $usuario->registroUsuario($_REQUEST['dni'],$_REQUEST['nombre'], $_REQUEST['email'], $_REQUEST['alias'],$clave_hash);
+                        $error=9;
+                        $_REQUEST="";
+                    }
                 }else{
                     $error=10;
                 }
@@ -129,7 +128,8 @@
                     $clave=$_REQUEST['clave'];
                     $datos=Usuarios::validarUsuario($nombre, $clave);
                     if($datos){
-                        include ('vista/vista_principal.php');
+                        // include ('vista/vista_principal.php');
+                        include ('vista/vista_inicio.php');
                     }else{
                         $error=12;
                         include_once ('vista/vista_login.php');
@@ -144,34 +144,39 @@
             }
         }
 
-        // public function modificarDatos(){
+        public function modificarDatos(){
             
-        //     if(isset($_REQUEST['cambiarPass'])){
-        //         if($_REQUEST['passActual']!="" && $_REQUEST['passNueva']!="" && $_REQUEST['passNueva2']!=""){
-        //             if(password_verify($_REQUEST['passActual'], $_SESSION['clave'])){
-        //                 if($_REQUEST['passNueva']==$_REQUEST['passNueva2']){
-        //                     $nuevaContra=password_hash($_REQUEST['passNueva'], PASSWORD_DEFAULT);
-        //                     $usuario=new Usuarios();
-        //                     $usuario->modificarContra($nuevaContra, $_SESSION['id']);
-        //                     $error=13;
-        //                     include_once ('vista/vista_modificarDatos.php');
-        //                 }else{
-        //                     $error=12;
-        //                     include_once ('vista/vista_modificarDatos.php');
-        //                 }
-        //             }else{
-        //                 $error=11;
-        //                 include_once ('vista/vista_modificarDatos.php');
-        //             }
-        //         }else{
-        //             $error=10;
-        //             include_once ('vista/vista_modificarDatos.php');
-        //         } 
-        //     }
+            if(isset($_REQUEST['cambiarPass'])){
+                if($_REQUEST['passActual']!="" && $_REQUEST['passNueva']!="" && $_REQUEST['passNueva2']!=""){
+                    if(password_verify($_REQUEST['passActual'], $_SESSION['clave'])){
+                        if($_REQUEST['passNueva']==$_REQUEST['passNueva2']){
+                            $nuevaContra=password_hash($_REQUEST['passNueva'], PASSWORD_DEFAULT);
+                            $usuario=new Usuarios();
+                            // $usuario->modificarContra($nuevaContra, $_SESSION['id']);
+                            $error=13;
+                            include_once ('vista/vista_modificarDatos.php');
+                        }else{
+                            $error=12;
+                            include_once ('vista/vista_modificarDatos.php');
+                        }
+                    }else{
+                        $error=11;
+                        include_once ('vista/vista_modificarDatos.php');
+                    }
+                }else{
+                    $error=10;
+                    include_once ('vista/vista_modificarDatos.php');
+                } 
+            }
             
-        //     include_once ('vista/vista_modificarDatos.php');
+            include_once ('vista/vista_modificarDatos.php');
             
-        // }
+        }
+
+        public function reservasUsuario(){
+            
+            include_once ('vista/vista_reservasUsuario.php');
+        }
 
         public function logout(){
             $_SESSION = array();

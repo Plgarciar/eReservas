@@ -1,7 +1,7 @@
 <?php ob_start();?>
 
 <h2>Nuestras instalaciones</h2>
-<hr>
+
 <div class="contenedorInstalaciones">
     
     <?php if(count($datos) < 1){ ?>
@@ -14,13 +14,16 @@
                 <p><?=$datos[$i]['direccion']?></p>
                 <p><?=$datos[$i]['horario']?></p>
                 <?php if($_SESSION){?>
+                <?php if($_SESSION['perfil_usuario']=="usuario"){?>
                 <a href="index.php?ctl=reservas">Reservar</a>  
-                <?php } ?>   
+                <?php } elseif ($_SESSION['perfil_usuario']=="administrador"){ ?>   
+                <a href="index.php?ctl=operaciones">Gestionar</a>
+                <?php } }?>
             </div>
     <?php } } ?>  
 </div>
 <?php if(!$_SESSION){?>
-    <p>Para hacer una reserva es necesario <a href="index.php?ctl=login">iniciar sesión</a> o <a href="index.php?ctl=registro">registrarse</a></p>
+    <p>Para hacer una reserva es necesario <a href="index.php?ctl=login">iniciar sesión</a></p>
 <?php } ?>
 
 

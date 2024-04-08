@@ -407,15 +407,25 @@ nav li:last-child:hover .submenu {
 } 
 
 hr{
-    color: darkblue;
-    
+    color: darkblue; 
+}
+
+.seccionesInicio{
+    border: 1px solid black;
+    width: 80%;
+    margin: 1.5em auto;
+    padding: 3em .5em;
+    text-align: center;
+}
+
+.seccionesInicio:nth-of-type(1){
+    margin-top: 5em;
 }
 
 .contenedorInstalaciones{
     display: flex;
     justify-content: center;
     margin: 1.5em;
-    
 }
 
 .instalacion{
@@ -461,8 +471,18 @@ iframe{
     height: 30em;
 }
 
+#reservasUsuario, #gestionarUsuarios, #gestionarInstalaciones{
+    margin: auto;
+    border: 1px solid black;
+}
+
+#gestionarInstalaciones img{
+    width: 25px;
+    height: 25px;
+}
+
 footer{
-    margin-top: 40%;
+    margin-top: 10%;
     background-color: #333333;
     color: white;
     display: flex;

@@ -1,11 +1,14 @@
 <?php
 
-// include_once("Conectar.php");
-
 class Usuarios{
 
+    public $id;
     public $dni;
+    public $nombre;
+    public $email;
+    public $alias;
     public $clave;
+    public $perfil;
 
     public function registroUsuario($dni,$nombre,$email,$alias,$clave){
         try{
@@ -112,6 +115,21 @@ class Usuarios{
     //         exit("<h1><br>Fichero: " . $e->getFile() . "<br>Línea: " . $e->getLine() . "<br>Error: " . $e->getMessage() . "</h1>");
     //     }
     // }    
+
+    public function verUsuarios(){
+        try{
+            $sql = "SELECT id, dni, nombre, email FROM usuarios";
+            $consulta = Conectar::conexion()->prepare($sql);           
+            $usuario = $consulta->execute();
+            $usuario = $consulta->fetchAll(PDO::FETCH_ASSOC);
+            
+            $consulta->closeCursor();
+            
+            return $usuario;
+        }catch (PDOException $e) {
+            exit("<h1><br>Fichero: " . $e->getFile() . "<br>Línea: " . $e->getLine() . "<br>Error: " . $e->getMessage() . "</h1>");
+        }
+    }
     
 }
 
