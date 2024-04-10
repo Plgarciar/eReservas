@@ -45,6 +45,22 @@
             $datos=$instalaciones->verInstalaciones();
             $rutaImagen="./recursos/imagenes/";
             
+
+            if(isset($_REQUEST['eliminarIns'])){
+                $datos=$instalaciones->eliminarInstalacion($_REQUEST['eliminarIns']);
+                header("Location: index.php?ctl=gestionarInstalaciones");
+            }
+
+            if(isset($_REQUEST['modificarIns'])){
+                // $datos=$instalaciones->modificarInstalacion($_REQUEST['modificarIns']);
+                // header("Location: index.php?ctl=gestionarInstalaciones");
+            }
+
+            if(isset($_REQUEST[''])){
+                
+                header("Location: index.php?ctl=gestionarInstalaciones");
+            }
+            
             include_once ('vista/vista_gestionarInstalaciones.php');
         }
 

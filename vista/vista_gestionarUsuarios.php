@@ -4,13 +4,11 @@
 <h2>Gestion Usuarios</h2>
 
 <table id="gestionarUsuarios">
-    <th>Id</th>
     <th>DNI</th>
     <th>Nombre</th>
     <th>Email</th>
     <?php foreach($datos as $indice=>$contenido){?>
     <tr>
-        <td><?= $datos[$indice]["id"]?></td> 
         <td><?= $datos[$indice]["dni"]?></td> 
         <td><?= $datos[$indice]["nombre"]?></td>
         <td><?= $datos[$indice]["email"]?></td>

@@ -52,7 +52,7 @@
                 && isset($_REQUEST['alias']) && $_REQUEST['alias']!= "" && isset($_REQUEST['clave']) && $_REQUEST['clave']!= "" ){
                     
                     //Compruebo que el dni no tenga mas de 10 caracteres y que concuerda con el formato de dni
-                    //Falta expresion regular para cif y nie
+                    //Falta expresion regular para cif y nie??
                     if(mb_strlen($_REQUEST['dni']) <= 10){
                         if(ControladorInicio::comprobarDni()){
                             $expresionRegular = array("options"=>array("regexp"=>"/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKET]$/i"));

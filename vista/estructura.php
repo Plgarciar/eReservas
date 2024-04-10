@@ -7,6 +7,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="vista/css/estilosInicio.css" />
         <title>Calvarrasa de Abajo - Reserva de instalaciones</title>
+       
     </head>
 
     <body>
@@ -69,5 +70,6 @@
                 </ul>
             </div>
         </footer>
+        <script src="vista/js/script.js"></script>
     </body>
 </html>
