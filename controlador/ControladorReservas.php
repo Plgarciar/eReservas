@@ -41,23 +41,29 @@
         }
 
         public function gestionarInstalaciones(){
+            filtrar($_REQUEST);
             $instalaciones=new Instalaciones();
             $datos=$instalaciones->verInstalaciones();
             $rutaImagen="./recursos/imagenes/";
             
 
+            if(isset($_REQUEST['nuevaInst'])){
+                //falta controlar los input
+                $datos=$instalaciones->insertarInstalacion($_REQUEST['nomInstalacion'], $_REQUEST['dirInstalacion'], $_REQUEST['horInstalacion'], $_REQUEST['imgInstalacion']);
+                header("Location: index.php?ctl=gestionarInstalaciones");
+            }
+
             if(isset($_REQUEST['eliminarIns'])){
                 $datos=$instalaciones->eliminarInstalacion($_REQUEST['eliminarIns']);
                 header("Location: index.php?ctl=gestionarInstalaciones");
             }
-
-            if(isset($_REQUEST['modificarIns'])){
-                // $datos=$instalaciones->modificarInstalacion($_REQUEST['modificarIns']);
-                // header("Location: index.php?ctl=gestionarInstalaciones");
+            
+            if(isset($_REQUEST['guardarMod'])){
+                $datos=$instalaciones->modificarInstalacion($_REQUEST['nuevoNom'], $_REQUEST['nuevoDir'], $_REQUEST['nuevoHor'], $_REQUEST['nuevoImg'], $_REQUEST['guardarMod']);
+                header("Location: index.php?ctl=gestionarInstalaciones");
             }
 
-            if(isset($_REQUEST[''])){
-                
+            if(isset($_REQUEST['botonCancelar'])){
                 header("Location: index.php?ctl=gestionarInstalaciones");
             }
             

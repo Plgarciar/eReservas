@@ -23,21 +23,20 @@ class Instalaciones{
         }
    }
 
-//     public function insertarInstalacion($id,$nombre,$direccion,$horario,$imagen){
-//         try{
-//             $sql = "INSERT INTO instalaciones (id,nombre,direccion,horario,imagen) VALUES (?,?,?,?,?)";
-//             $consulta = Conectar::conexion()->prepare($sql);
-//             $consulta->bindParam(1, $id);
-//             $consulta->bindParam(2, $nombre);
-//             $consulta->bindParam(3, $direccion);
-//             $consulta->bindParam(4, $horario);
-//             $consulta->bindParam(5, $imagen);
-//             $consulta->execute();
-//             $consulta->closeCursor();
-//         }catch (PDOException $e) {
-//             exit("<h1><br>Fichero: " . $e->getFile() . "<br>Línea: " . $e->getLine() . "<br>Error: " . $e->getMessage() . "</h1>");
-//         }
-//    }
+    public function insertarInstalacion($nombre,$direccion,$horario,$imagen){
+        try{
+            $sql = "INSERT INTO instalaciones (nombre,direccion,horario,imagen) VALUES (?,?,?,?)";
+            $consulta = Conectar::conexion()->prepare($sql);
+            $consulta->bindParam(1, $nombre);
+            $consulta->bindParam(2, $direccion);
+            $consulta->bindParam(3, $horario);
+            $consulta->bindParam(4, $imagen);
+            $consulta->execute();
+            $consulta->closeCursor();
+        }catch (PDOException $e) {
+            exit("<h1><br>Fichero: " . $e->getFile() . "<br>Línea: " . $e->getLine() . "<br>Error: " . $e->getMessage() . "</h1>");
+        }
+   }
 
     public function modificarInstalacion($nombre, $direccion, $horario, $imagen, $id){
         try{
