@@ -23,7 +23,7 @@
         <p class="errores"><?=mostrarError($error)?></p>
     <?php ;} else {echo "";};?>
 
-
+    <p>¿Ya estás registrado?<a href="index.php?ctl=login">Inicia sesión</a></p>
 <?php $contenido = ob_get_clean();?>
 
 <?php include 'estructura.php' ;?>

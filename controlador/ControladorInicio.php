@@ -145,8 +145,10 @@
         }
 
         public function modificarDatos(){
-            
-            if(isset($_REQUEST['cambiarPass'])){
+            $datosUsuario=new Usuarios();
+            $datos=$datosUsuario->verUsuarios();
+
+            if(isset($_REQUEST['modDatos'])){
                 if($_REQUEST['passActual']!="" && $_REQUEST['passNueva']!="" && $_REQUEST['passNueva2']!=""){
                     if(password_verify($_REQUEST['passActual'], $_SESSION['clave'])){
                         if($_REQUEST['passNueva']==$_REQUEST['passNueva2']){

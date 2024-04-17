@@ -118,7 +118,7 @@ class Usuarios{
 
     public function verUsuarios(){
         try{
-            $sql = "SELECT id, dni, nombre, email FROM usuarios";
+            $sql = "SELECT id, dni, nombre, email, alias, clave FROM usuarios";
             $consulta = Conectar::conexion()->prepare($sql);           
             $usuario = $consulta->execute();
             $usuario = $consulta->fetchAll(PDO::FETCH_ASSOC);

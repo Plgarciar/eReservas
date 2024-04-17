@@ -16,16 +16,17 @@
                 <?php if($_SESSION){?>
                 <?php if($_SESSION['perfil_usuario']=="usuario"){?>
                 <a href="index.php?ctl=reservas">Reservar</a>  
-                <?php } elseif ($_SESSION['perfil_usuario']=="administrador"){ ?>   
-                <a href="index.php?ctl=operaciones">Gestionar</a>
-                <?php } }?>
-            </div>
+                <?php } } ?>   
+                    
+                </div>
+                
     <?php } } ?>  
 </div>
-<?php if(!$_SESSION){?>
+<?php if(($_SESSION) && ($_SESSION['perfil_usuario']=="administrador")){ ?>   
+    <a href="index.php?ctl=gestionarInstalaciones">Gestionar</a>
+<?php } if(!$_SESSION){?>
     <p>Para hacer una reserva es necesario <a href="index.php?ctl=login">iniciar sesión</a></p>
 <?php } ?>
-
 
 <?php $contenido = ob_get_clean();?>
 
