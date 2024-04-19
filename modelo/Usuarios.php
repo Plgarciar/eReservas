@@ -91,7 +91,6 @@ class Usuarios{
                     $_SESSION['alias_usuario']=$usuario['alias'];
                     $_SESSION['password_usuario']=$usuario['clave'];
                     $_SESSION['perfil_usuario']=$usuario['perfil'];
-                    // $_SESSION['clave']=$clave;
                 }
                 return password_verify($clave, $usuario['clave']);
                 
@@ -102,6 +101,21 @@ class Usuarios{
             exit("<h1><br>Fichero: " . $e->getFile() . "<br>Línea: " . $e->getLine() . "<br>Error: " . $e->getMessage() . "</h1>");
         }
     }
+
+    public function modificarDatos($nuevoNombre, $nuevoEmail, $nuevoAlias, $idUsuario){
+        try{
+            $sql = "UPDATE usuarios SET nombre = ?, email= ?, alias= ? WHERE id=?" ;
+            $consulta = Conectar::conexion()->prepare($sql);
+            $consulta->bindParam(1, $nuevoNombre);
+            $consulta->bindParam(2, $nuevoEmail);
+            $consulta->bindParam(3, $nuevoAlias);
+            $consulta->bindParam(4, $idUsuario);
+            $consulta->execute();
+            $consulta->closeCursor();
+        }catch (PDOException $e) {
+            exit("<h1><br>Fichero: " . $e->getFile() . "<br>Línea: " . $e->getLine() . "<br>Error: " . $e->getMessage() . "</h1>");
+        }
+    }  
 
     // public function modificarContra($nuevaContra, $idUsuario){
     //     try{

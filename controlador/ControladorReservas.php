@@ -46,11 +46,16 @@
             $datos=$instalaciones->verInstalaciones();
             $rutaImagen="./recursos/imagenes/";
             
-
             if(isset($_REQUEST['nuevaInst'])){
+                $imgGenerica="icono_generico.png";
                 //falta controlar los input
-                $datos=$instalaciones->insertarInstalacion($_REQUEST['nomInstalacion'], $_REQUEST['dirInstalacion'], $_REQUEST['horInstalacion'], $_REQUEST['imgInstalacion']);
-                header("Location: index.php?ctl=gestionarInstalaciones");
+                if($_REQUEST['imgInstalacion']==""){
+                    $datos=$instalaciones->insertarInstalacion($_REQUEST['nomInstalacion'], $_REQUEST['dirInstalacion'], $_REQUEST['horInstalacion'], $imgGenerica);
+                    header("Location: index.php?ctl=gestionarInstalaciones");
+                }else{
+                    $datos=$instalaciones->insertarInstalacion($_REQUEST['nomInstalacion'], $_REQUEST['dirInstalacion'], $_REQUEST['horInstalacion'], $_REQUEST['imgInstalacion']);
+                    header("Location: index.php?ctl=gestionarInstalaciones");
+                }
             }
 
             if(isset($_REQUEST['eliminarIns'])){

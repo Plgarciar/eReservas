@@ -1,17 +1,22 @@
-<?php ob_start(); var_dump($_REQUEST)?>
+<?php ob_start(); ?>
 
 
 <h2>Gestion Instalaciones</h2>
 
 <form action="index.php?ctl=gestionarInstalaciones" method="post">
-    <?php if(!isset($_REQUEST['anadirInstalacion'])){ ?>
-        <td><input type="submit" name="anadirInstalacion" id="anadirInstalacion" value="Añadir" ></td>
+    <?php if(!isset($_REQUEST['anadirInstalacion'])){ 
+            if(!isset($_REQUEST['modificarIns'])){?>
+                <td><input type="submit" name="anadirInstalacion" id="anadirInstalacion" value="Añadir" ></td>
+                <?php } else {?>
+                    <td><input type="submit" name="anadirInstalacion" id="anadirInstalacion" value="Añadir" style="visibility: hidden;"></td>
+                    <?php }?>   
     <?php } else { ?>
         <td>Nombre:<input type="text" name="nomInstalacion" id="nomInstalacion" value=<?= isset($_REQUEST['nomInstalacion']) ? $_REQUEST['nomInstalacion'] : "" ?>></td> 
         <td>Dirección: <input type="text" name="dirInstalacion" id="dirInstalacion" value=<?= isset($_REQUEST['dirInstalacion']) ? $_REQUEST['dirInstalacion'] : "" ?>></td>
         <td>Horario: <input type="text" name="horInstalacion" id="horInstalacion" value=<?= isset($_REQUEST['horInstalacion']) ? $_REQUEST['horInstalacion'] : "" ?>></td>
         <td>Imagen: <input type="file" name="imgInstalacion" id="imgInstalacion" value=<?= isset($_REQUEST['imgInstalacion']) ? $_REQUEST['imgInstalacion'] : "" ?>></td>
         <td><input type="submit" name="nuevaInst" id="nuevaInst" value="Guardar" ></td>
+        <td><button type="submit" name="botonCancelar" id="botonCancelar">Cancelar</button></td>
     <?php }?>
     <table id="gestionarInstalaciones">
         <tr>
@@ -35,6 +40,7 @@
         <td><button type="submit" name="modificarIns" id="modificarIns" value="<?= $datos[$indice]["id"]?>">Modificar</button></td>
         <td><button type="submit" name="eliminarIns" id="eliminarIns" value="<?= $datos[$indice]["id"]?>">Eliminar</button></td>
         <?php } else if (($_REQUEST['modificarIns'])==$datos[$indice]["id"]){ ?>
+            <td><input type="submit" name="anadirInstalacion" id="anadirInstalacion" value="Añadir" style="visibility: hidden;"></td>
         <td><input type="text" name="nuevoNom" id="nuevoNom" value=<?= $datos[$indice]["nombre"]?>></td> 
         <td><input type="text" name="nuevoDir" id="nuevoDir" value=<?= $datos[$indice]["direccion"]?>></td>
         <td><input type="text" name="nuevoHor" id="nuevoHor" value=<?= $datos[$indice]["horario"]?>></td>

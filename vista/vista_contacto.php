@@ -1,16 +1,16 @@
-<?php ob_start();?>
+<?php ob_start(); var_dump($_SESSION)?>
 
 <h2>Contacta con nosotros</h2>
 
 <form action="" id="formContacto">
     <label for=""></label>
-    <input type="text" name="" id="" placeholder="Nombre">
+    <input type="text" name="" id="" placeholder="Nombre" value="<?= isset($_SESSION['nombre_usuario']) ? $_SESSION['nombre_usuario'] : "" ?>">
 
+    <label for=""></label>
+    <input type="email" name="" id="" placeholder="Dirección de correo electrónico" value="<?= isset($_SESSION['email_usuario']) ? $_SESSION['email_usuario'] : "" ?>">
+    
     <label for=""></label>
     <input type="tel" name="" id="" placeholder="Teléfono">
-
-    <label for=""></label>
-    <input type="email" name="" id="" placeholder="Dirección de correo electrónico">
 
     <label for=""></label>
     <input type="text" name="" id="" placeholder="Asunto">

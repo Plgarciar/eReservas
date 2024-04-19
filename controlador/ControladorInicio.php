@@ -52,7 +52,7 @@
                 && isset($_REQUEST['alias']) && $_REQUEST['alias']!= "" && isset($_REQUEST['clave']) && $_REQUEST['clave']!= "" ){
                     
                     //Compruebo que el dni no tenga mas de 10 caracteres y que concuerda con el formato de dni
-                    //Falta expresion regular para cif y nie??
+                    //expresion regular cif y NIE ??
                     if(mb_strlen($_REQUEST['dni']) <= 10){
                         if(ControladorInicio::comprobarDni()){
                             $expresionRegular = array("options"=>array("regexp"=>"/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKET]$/i"));
@@ -69,7 +69,7 @@
                         $error=7;
                     }
                              
-                    // //compruebo que el nombre no tenga mas de 50 caracteres y que no hay numeros.
+                    //compruebo que el nombre no tenga mas de 50 caracteres y que no hay numeros.
                     if(mb_strlen($_REQUEST['nombre']) <= 50){
                         if(!is_numeric($_REQUEST['nombre'])){
                             $nombre_ok=true;
@@ -80,7 +80,7 @@
                         $error=2;
                     }
                     
-                    // //compruebo el email. falta controlar que detras del punto sean 2 o 3 letras y que despues del @ sean 3 o mas letras
+                    //compruebo el email. falta controlar que detras del punto sean 2 o 3 letras y que despues del @ sean 3 o mas letras
                     if(mb_strlen($_REQUEST['email']) <= 50){
                         if(filter_var($_REQUEST['email'], FILTER_VALIDATE_EMAIL)){
                             if(ControladorInicio::comprobarEmail()){
@@ -95,7 +95,7 @@
                         $error=4;
                     }
 
-                    // //compruebo el alias. falta comprobar que empiece por letra
+                    //compruebo el alias. falta comprobar que empiece por letra
                     if(mb_strlen($_REQUEST['alias']) <= 20){
                         if(ControladorInicio::comprobarAlias()){
                             $alias_ok=true;
@@ -128,7 +128,6 @@
                     $clave=$_REQUEST['clave'];
                     $datos=Usuarios::validarUsuario($nombre, $clave);
                     if($datos){
-                        // include ('vista/vista_principal.php');
                         include ('vista/vista_inicio.php');
                     }else{
                         $error=12;
@@ -148,28 +147,28 @@
             $datosUsuario=new Usuarios();
             $datos=$datosUsuario->verUsuarios();
 
-            if(isset($_REQUEST['modDatos'])){
-                if($_REQUEST['passActual']!="" && $_REQUEST['passNueva']!="" && $_REQUEST['passNueva2']!=""){
-                    if(password_verify($_REQUEST['passActual'], $_SESSION['clave'])){
-                        if($_REQUEST['passNueva']==$_REQUEST['passNueva2']){
-                            $nuevaContra=password_hash($_REQUEST['passNueva'], PASSWORD_DEFAULT);
-                            $usuario=new Usuarios();
-                            // $usuario->modificarContra($nuevaContra, $_SESSION['id']);
-                            $error=13;
-                            include_once ('vista/vista_modificarDatos.php');
-                        }else{
-                            $error=12;
-                            include_once ('vista/vista_modificarDatos.php');
-                        }
-                    }else{
-                        $error=11;
-                        include_once ('vista/vista_modificarDatos.php');
-                    }
-                }else{
-                    $error=10;
-                    include_once ('vista/vista_modificarDatos.php');
-                } 
-            }
+            // if(isset($_REQUEST['modDatos'])){
+            //     if($_REQUEST['passActual']!="" && $_REQUEST['passNueva']!="" && $_REQUEST['passNueva2']!=""){
+            //         if(password_verify($_REQUEST['passActual'], $_SESSION['clave'])){
+            //             if($_REQUEST['passNueva']==$_REQUEST['passNueva2']){
+            //                 $nuevaContra=password_hash($_REQUEST['passNueva'], PASSWORD_DEFAULT);
+            //                 $usuario=new Usuarios();
+            //                 // $usuario->modificarContra($nuevaContra, $_SESSION['id']);
+            //                 $error=13;
+            //                 include_once ('vista/vista_modificarDatos.php');
+            //             }else{
+            //                 $error=12;
+            //                 include_once ('vista/vista_modificarDatos.php');
+            //             }
+            //         }else{
+            //             $error=11;
+            //             include_once ('vista/vista_modificarDatos.php');
+            //         }
+            //     }else{
+            //         $error=10;
+            //         include_once ('vista/vista_modificarDatos.php');
+            //     } 
+            // }
             
             include_once ('vista/vista_modificarDatos.php');
             
