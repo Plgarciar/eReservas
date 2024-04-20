@@ -144,6 +144,22 @@ class Usuarios{
             exit("<h1><br>Fichero: " . $e->getFile() . "<br>Línea: " . $e->getLine() . "<br>Error: " . $e->getMessage() . "</h1>");
         }
     }
+
+    public function verUsuarioSesion($id){
+        try{
+            $sql = "SELECT id, dni, nombre, email, alias, clave FROM usuarios WHERE id=?";
+            $consulta = Conectar::conexion()->prepare($sql);
+            $consulta->bindParam(1, $id);           
+            $usuario = $consulta->execute();
+            $usuario = $consulta->fetch(PDO::FETCH_ASSOC);
+            
+            $consulta->closeCursor();
+            
+            return $usuario;
+        }catch (PDOException $e) {
+            exit("<h1><br>Fichero: " . $e->getFile() . "<br>Línea: " . $e->getLine() . "<br>Error: " . $e->getMessage() . "</h1>");
+        }
+    }
     
 }
 

@@ -11,7 +11,7 @@
             $instalaciones=new Instalaciones();
             $datos=$instalaciones->verInstalaciones();
             $rutaImagen="./recursos/imagenes/";
-         
+           
             include ('vista/vista_instalaciones.php');
           
         } 
@@ -23,6 +23,7 @@
         public function reservas(){
             $instalaciones=new Instalaciones();
             $datos=$instalaciones->verInstalaciones();
+            // $instalacion=$_REQUEST['reser'];
             
             include('vista/vista_reservas.php');
         }

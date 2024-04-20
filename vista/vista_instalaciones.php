@@ -15,7 +15,9 @@
                 <p><?=$datos[$i]['horario']?></p>
                 <?php if($_SESSION){?>
                 <?php if($_SESSION['perfil_usuario']=="usuario"){?>
-                <a href="index.php?ctl=reservas">Reservar</a>  
+                <form action="index.php?ctl=reservas" method="post">
+                    <button class="botonP" type="submit" name="reser" id="reser" value="<?=$datos[$i]['id']?>">Reservar</button>
+                </form>
                 <?php } } ?>   
                     
                 </div>
@@ -23,9 +25,9 @@
     <?php } } ?>  
 </div>
 <?php if(($_SESSION) && ($_SESSION['perfil_usuario']=="administrador")){ ?>   
-    <a href="index.php?ctl=gestionarInstalaciones">Gestionar</a>
+    <a class="botonP" href="index.php?ctl=gestionarInstalaciones">Gestionar</a>
 <?php } if(!$_SESSION){?>
-    <p>Para hacer una reserva es necesario <a href="index.php?ctl=login">iniciar sesión</a></p>
+    <p>Para hacer una reserva es necesario <a class="enlaceP" href="index.php?ctl=login">iniciar sesión</a></p>
 <?php } ?>
 
 <?php $contenido = ob_get_clean();?>

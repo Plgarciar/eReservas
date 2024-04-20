@@ -16,7 +16,7 @@
     <?php }?>
 </table>
 
-<a href="index.php?ctl=operaciones">Volver a operaciones</a>
+<a class="enlaceP" href="index.php?ctl=operaciones">Volver a operaciones</a>
 <?php $contenido = ob_get_clean();?>
 
 <?php include 'estructura.php' ;?>

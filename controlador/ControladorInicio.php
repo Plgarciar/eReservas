@@ -13,34 +13,61 @@
 
         public static function comprobarDni(){
             filtrar($_REQUEST);
-           
-            $datos=Usuarios::existeDni($_REQUEST['dni']);
-            if(count($datos)>0){
-                return false; //existe el dni en la base de datos
-            }else{
-                return true;//no existe el dni en la base de datos
+            
+            if(isset($_REQUEST['email'])){
+                $datos=Usuarios::existeDni($_REQUEST['dni']);
+                if(count($datos)>0){
+                    return false; //existe el dni en la base de datos
+                }else{
+                    return true;//no existe el dni en la base de datos
+                }
             }
         }
        
         public static function comprobarEmail(){
             filtrar($_REQUEST);
-           
-            $datos=Usuarios::existeEmail($_REQUEST['email']);
-            if(count($datos)>0){
-                return false; //existe el email en la base de datos
-            }else{
-                return true;//no existe el email en la base de datos
+            
+            if(isset($_REQUEST['email'])){
+                $datos=Usuarios::existeEmail($_REQUEST['email']);
+
+                if(count($datos)>0){
+                    return false; //existe el email en la base de datos
+                }else{
+                    return true;//no existe el email en la base de datos
+                }
             }
+
+            if(isset($_REQUEST['newEmail'])){
+                $datos2=Usuarios::existeEmail($_REQUEST['newEmail']);
+
+                if(count($datos2)>0){
+                    return false; //existe el email en la base de datos
+                }else{
+                    return true;//no existe el email en la base de datos
+                }
+            }
+           
         }
 
         public static function comprobarAlias(){
             filtrar($_REQUEST);
            
-            $datos=Usuarios::existeAlias($_REQUEST['alias']);
-            if(count($datos)>0){
-                return false; //existe el alias en la base de datos
-            }else{
-                return true;//no existe el alias en la base de datos
+            if(isset($_REQUEST['alias'])){
+                $datos=Usuarios::existeAlias($_REQUEST['alias']);
+                if(count($datos)>0){
+                    return false; //existe el alias en la base de datos
+                }else{
+                    return true;//no existe el alias en la base de datos
+                }
+            }
+
+            if(isset($_REQUEST['newAlias'])){
+                $datos2=Usuarios::existeAlias($_REQUEST['newAlias']);
+                if(count($datos2)>0){
+                    return false; //existe el alias en la base de datos
+                }else{
+                    return true;//no existe el alias en la base de datos
+                }
             }
         }
 
@@ -145,30 +172,94 @@
 
         public function modificarDatos(){
             $datosUsuario=new Usuarios();
+            $datos=$datosUsuario->verUsuarioSesion($_SESSION['id_usuario']);
+
+            if(isset($_REQUEST['guardarDatos'])){
+                if(isset($_REQUEST['newNombre']) && $_REQUEST['newNombre']!="" && isset($_REQUEST['newEmail']) && $_REQUEST['newEmail']!="" && isset($_REQUEST['newAlias']) && $_REQUEST['newAlias']!=""){
+                    if(mb_strlen($_REQUEST['newNombre']) <= 50){
+                        if(!is_numeric($_REQUEST['newNombre'])){
+                            $newNombre_ok=true;
+                        }else{
+                            $error=3;
+                        }
+                    }else{
+                        $error=2;
+                    }
+
+                    //compruebo el email. falta controlar que detras del punto sean 2 o 3 letras y que despues del @ sean 3 o mas letras
+                    if(mb_strlen($_REQUEST['newEmail']) <= 50){
+                        if(filter_var($_REQUEST['newEmail'], FILTER_VALIDATE_EMAIL)){
+                            if(ControladorInicio::comprobarEmail()){
+                                $newEmail_ok=true;
+                            }else{
+                                $error=6;
+                            }
+                        }else{
+                            $error=5;
+                        }
+                    }else{
+                        $error=4;
+                    }
+
+                    //compruebo el alias. falta comprobar que empiece por letra
+                    if(mb_strlen($_REQUEST['newAlias']) <= 20){
+                        if(ControladorInicio::comprobarAlias()){
+                            $newAlias_ok=true;
+                        }else{
+                            $error=8;
+                        }
+                    }else{
+                        $error=7;
+                    }
+
+                    if(isset($newNombre_ok) && isset($newEmail_ok) && isset($newAlias_ok)){
+                        $usuario= new Usuarios();
+                        $usuario->modificarDatos($_REQUEST['newNombre'], $_REQUEST['newEmail'], $_REQUEST['newAlias'], $_SESSION['id_usuario']);
+                        $error=16;
+                        $_SESSION['nombre_usuario']=$_REQUEST['newNombre'];
+                        $_SESSION['email_usuario']=$_REQUEST['newEmail'];
+                        $_SESSION['alias_usuario']=$_REQUEST['newAlias'];
+                        
+                        $_REQUEST="";
+               
+                        // header("Refresh: 0");
+                    }
+                }else{
+                    $error=10;
+                    include ('vista/vista_modificarDatos.php');
+                } 
+            }
+            
+            include_once ('vista/vista_modificarDatos.php');
+            
+        }
+
+        public function modificarPass(){
+            $datosUsuario=new Usuarios();
             $datos=$datosUsuario->verUsuarios();
 
-            // if(isset($_REQUEST['modDatos'])){
-            //     if($_REQUEST['passActual']!="" && $_REQUEST['passNueva']!="" && $_REQUEST['passNueva2']!=""){
-            //         if(password_verify($_REQUEST['passActual'], $_SESSION['clave'])){
-            //             if($_REQUEST['passNueva']==$_REQUEST['passNueva2']){
-            //                 $nuevaContra=password_hash($_REQUEST['passNueva'], PASSWORD_DEFAULT);
-            //                 $usuario=new Usuarios();
-            //                 // $usuario->modificarContra($nuevaContra, $_SESSION['id']);
-            //                 $error=13;
-            //                 include_once ('vista/vista_modificarDatos.php');
-            //             }else{
-            //                 $error=12;
-            //                 include_once ('vista/vista_modificarDatos.php');
-            //             }
-            //         }else{
-            //             $error=11;
-            //             include_once ('vista/vista_modificarDatos.php');
-            //         }
-            //     }else{
-            //         $error=10;
-            //         include_once ('vista/vista_modificarDatos.php');
-            //     } 
-            // }
+            if(isset($_REQUEST['modPass'])){
+                if($_REQUEST['passActual']!="" && $_REQUEST['passNueva']!="" && $_REQUEST['passNueva2']!=""){
+                    if(password_verify($_REQUEST['passActual'], $_SESSION['clave'])){
+                        if($_REQUEST['passNueva']==$_REQUEST['passNueva2']){
+                            $nuevaContra=password_hash($_REQUEST['passNueva'], PASSWORD_DEFAULT);
+                            $usuario=new Usuarios();
+                            // $usuario->modificarContra($nuevaContra, $_SESSION['id']);
+                            $error=13;
+                            include_once ('vista/vista_modificarDatos.php');
+                        }else{
+                            $error=12;
+                            include_once ('vista/vista_modificarDatos.php');
+                        }
+                    }else{
+                        $error=11;
+                        include_once ('vista/vista_modificarDatos.php');
+                    }
+                }else{
+                    $error=10;
+                    include_once ('vista/vista_modificarDatos.php');
+                } 
+            }
             
             include_once ('vista/vista_modificarDatos.php');
             

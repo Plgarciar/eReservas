@@ -6,11 +6,13 @@
     <th>Instalacion</th>
     <th>Fecha</th>
     <th>Hora</th>
+    <th></th>
     <?php foreach($datos as $indice=>$contenido){?>
     <tr>
         <td><?= $datos[$indice]["instalacion"]?></td> 
         <td><?= $datos[$indice]["fecha"]?></td> 
         <td><?= $datos[$indice]["horas"]?></td> 
+        <td>Ver detalle</td>
     </tr>
     <?php }?>
 </table>

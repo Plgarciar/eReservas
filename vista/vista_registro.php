@@ -17,13 +17,13 @@
         <label>Contraseña</label>
         <input type="password" name="clave" id="clave" value="<?= isset($_REQUEST['nombre']) ? $_REQUEST['clave'] : "" ?>"/>
         <br><br>
-        <p><input type="submit" name="registro" id="registro" value="Registrarse"/></p>
+        <p><input class="botonP" type="submit" name="registro" id="registro" value="Registrarse"/></p>
     </form>
     <?php if(isset($error)){ ?>
         <p class="errores"><?=mostrarError($error)?></p>
     <?php ;} else {echo "";};?>
 
-    <p>¿Ya estás registrado?<a href="index.php?ctl=login">Inicia sesión</a></p>
+    <p>¿Ya estás registrado? <a class="enlaceP" href="index.php?ctl=login">Inicia sesión</a></p>
 <?php $contenido = ob_get_clean();?>
 
 <?php include 'estructura.php' ;?>

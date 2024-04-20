@@ -6,10 +6,10 @@
     <br><br>
     <label>Contraseña</label>
     <input type="password" name="clave" id="clave"/>
-    <p><input type="submit" name="login" id="login" value="Acceder"/></p>
+    <p><input class="botonP" type="submit" name="login" id="login" value="Acceder"/></p>
 </form>
 <p>¿Olvidaste tu contraseña?</p>
-<p>¿No tienes cuenta? <a href="index.php?ctl=registro">Regístrate</a></p>
+<p>¿No tienes cuenta? <a class="enlaceP" href="index.php?ctl=registro">Regístrate</a></p>
 <?php if(isset($error)){ ?>
     <p class="errores"><?=mostrarError($error)?></p>
 <?php ;} else {echo "";};?>

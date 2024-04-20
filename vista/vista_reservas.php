@@ -4,10 +4,11 @@
 <form action="" method="post" id="formReservas">
     
     <select name="" id="">
-        <option value="">Selecciona instalación</option>
-        <?php for($i=0;$i<count($datos);$i++){ ?>
-            <option value="<?= $datos[$i]['id']?>"><?= $datos[$i]['nombre']?></option>
-        <?php } ?>
+        <option>Selecciona instalación</option>
+        <?php for($i=0;$i<count($datos);$i++){ 
+            if(isset($_REQUEST['reser']) && $_REQUEST['reser']==$datos[$i]['id']){?>
+            <option value="<?= $datos[$i]['id']?>" selected><?= $datos[$i]['nombre']?></option>
+        <?php } } ?>
     </select>
     <input type="date" name="" id="" >
     <?php for($i=0;$i<count($datos);$i++){ ?>
