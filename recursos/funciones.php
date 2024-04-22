@@ -45,6 +45,9 @@
             14=>'El dni no puede tener una logitud de más de 20 caracteres',
             15=>'Formato de DNI incorrecto',
             16=>'Datos modificados correctamente',
+            17=>'Contraseña modificada correctamente',
+            18=>'Las contraseñas no coinciden',
+            19=>'La contraseña actual no es correcta',
         ];
 
         if(isset($errores[$error])){

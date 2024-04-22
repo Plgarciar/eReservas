@@ -14,7 +14,7 @@
     </a>
 
     <a href="#" class="seccionesInicio">
-        <div >
+        <div>
             <p>Ayuda y normativa</p>
         </div>
     </a>

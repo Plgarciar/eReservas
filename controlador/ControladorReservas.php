@@ -77,7 +77,9 @@
         }
 
         public function gestionarReservas(){
-            
+            $reservas=new Reservas();
+            $datos=$reservas->verReservas();
+
             include_once ('vista/vista_gestionarReservas.php');
         }
 

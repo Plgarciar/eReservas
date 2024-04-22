@@ -3,19 +3,15 @@
 <h2>Contacta con nosotros</h2>
 
 <form action="" id="formContacto">
-    <label for=""></label>
+  
     <input type="text" name="" id="" placeholder="Nombre" value="<?= isset($_SESSION['nombre_usuario']) ? $_SESSION['nombre_usuario'] : "" ?>">
 
-    <label for=""></label>
     <input type="email" name="" id="" placeholder="Dirección de correo electrónico" value="<?= isset($_SESSION['email_usuario']) ? $_SESSION['email_usuario'] : "" ?>">
     
-    <label for=""></label>
     <input type="tel" name="" id="" placeholder="Teléfono">
 
-    <label for=""></label>
     <input type="text" name="" id="" placeholder="Asunto">
 
-    <label for=""></label>
     <textarea name="" id="" cols="30" rows="10" placeholder="Mensaje"></textarea>
 
     <input class="botonP" type="submit" value="Enviar" >

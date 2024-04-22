@@ -29,6 +29,7 @@
             
             if(isset($_REQUEST['email'])){
                 $datos=Usuarios::existeEmail($_REQUEST['email']);
+                $datos2=Usuarios::existeEmail($_REQUEST['newEmail']);
 
                 if(count($datos)>0){
                     return false; //existe el email en la base de datos
@@ -54,6 +55,8 @@
            
             if(isset($_REQUEST['alias'])){
                 $datos=Usuarios::existeAlias($_REQUEST['alias']);
+                $datos2=Usuarios::existeAlias($_REQUEST['newAlias']);
+
                 if(count($datos)>0){
                     return false; //existe el alias en la base de datos
                 }else{
@@ -173,7 +176,7 @@
         public function modificarDatos(){
             $datosUsuario=new Usuarios();
             $datos=$datosUsuario->verUsuarioSesion($_SESSION['id_usuario']);
-
+            
             if(isset($_REQUEST['guardarDatos'])){
                 if(isset($_REQUEST['newNombre']) && $_REQUEST['newNombre']!="" && isset($_REQUEST['newEmail']) && $_REQUEST['newEmail']!="" && isset($_REQUEST['newAlias']) && $_REQUEST['newAlias']!=""){
                     if(mb_strlen($_REQUEST['newNombre']) <= 50){
@@ -189,10 +192,15 @@
                     //compruebo el email. falta controlar que detras del punto sean 2 o 3 letras y que despues del @ sean 3 o mas letras
                     if(mb_strlen($_REQUEST['newEmail']) <= 50){
                         if(filter_var($_REQUEST['newEmail'], FILTER_VALIDATE_EMAIL)){
-                            if(ControladorInicio::comprobarEmail()){
-                                $newEmail_ok=true;
+                            if($_REQUEST['newEmail'] != $_SESSION['email_usuario']){
+
+                                if(ControladorInicio::comprobarEmail()){
+                                    $newEmail_ok=true;
+                                }else{
+                                    $error=6;
+                                }
                             }else{
-                                $error=6;
+                                $newEmail_ok=true;
                             }
                         }else{
                             $error=5;
@@ -203,10 +211,14 @@
 
                     //compruebo el alias. falta comprobar que empiece por letra
                     if(mb_strlen($_REQUEST['newAlias']) <= 20){
-                        if(ControladorInicio::comprobarAlias()){
-                            $newAlias_ok=true;
+                        if($_REQUEST['newAlias'] != $_SESSION['alias_usuario']){
+                            if(ControladorInicio::comprobarAlias()){
+                                $newAlias_ok=true;
+                            }else{
+                                $error=8;
+                            }
                         }else{
-                            $error=8;
+                            $newAlias_ok=true;
                         }
                     }else{
                         $error=7;
@@ -222,37 +234,29 @@
                         
                         $_REQUEST="";
                
-                        // header("Refresh: 0");
                     }
                 }else{
                     $error=10;
                     include ('vista/vista_modificarDatos.php');
-                } 
+                }
+
             }
-            
-            include_once ('vista/vista_modificarDatos.php');
-            
-        }
 
-        public function modificarPass(){
-            $datosUsuario=new Usuarios();
-            $datos=$datosUsuario->verUsuarios();
-
-            if(isset($_REQUEST['modPass'])){
-                if($_REQUEST['passActual']!="" && $_REQUEST['passNueva']!="" && $_REQUEST['passNueva2']!=""){
-                    if(password_verify($_REQUEST['passActual'], $_SESSION['clave'])){
+            if(isset($_REQUEST['guardarDatos2'])){
+                if($_REQUEST['actualPass']!="" && $_REQUEST['passNueva']!="" && $_REQUEST['passNueva2']!=""){
+                    if(password_verify($_REQUEST['actualPass'], $_SESSION['password_usuario'])){
                         if($_REQUEST['passNueva']==$_REQUEST['passNueva2']){
-                            $nuevaContra=password_hash($_REQUEST['passNueva'], PASSWORD_DEFAULT);
+                            $nuevaPass=password_hash($_REQUEST['passNueva'], PASSWORD_DEFAULT);
                             $usuario=new Usuarios();
-                            // $usuario->modificarContra($nuevaContra, $_SESSION['id']);
-                            $error=13;
+                            $usuario->modificarPass($nuevaPass, $_SESSION['id_usuario']);
+                            $error=17;
                             include_once ('vista/vista_modificarDatos.php');
                         }else{
-                            $error=12;
+                            $error=18;
                             include_once ('vista/vista_modificarDatos.php');
                         }
                     }else{
-                        $error=11;
+                        $error=19;
                         include_once ('vista/vista_modificarDatos.php');
                     }
                 }else{

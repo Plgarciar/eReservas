@@ -12,7 +12,8 @@
         <td><?= $datos[$indice]["instalacion"]?></td> 
         <td><?= $datos[$indice]["fecha"]?></td> 
         <td><?= $datos[$indice]["horas"]?></td> 
-        <td>Ver detalle</td>
+        <!-- <td><a >Ver detalle</a></td> -->
+        <td><input type="submit" class="botonP" value="Ver detalle" id="detalle" name="detalle"></td>
     </tr>
     <?php }?>
 </table>

@@ -110,15 +110,26 @@ main p{
     text-align: center;
 }
 
-.enlaceP{
+.enlaceI{
     text-decoration: none;
+    /* margin: 5em auto; */
+    margin:auto;
+    text-align: center;
 }
 
-.enlaceP:hover{
+.enlaceP{
+    text-decoration: none;
+    display: block;
+    margin: 5em auto;
+    margin:auto;
+    text-align: center;
+}
+
+.enlaceP:hover, .enlaceI:hover{
     text-decoration: underline;
 }
 
-.botonP{
+.botonP, .botonE, .botonM{
     font-size: 1em;
     text-align: center;
     background-color: #006FB8;
@@ -139,7 +150,21 @@ main p{
     cursor: pointer;
 }
 
-#contenedorInicio{
+.botonE:hover{
+    background-color: red;
+    color: white;
+    border: 1px solid #c0c3c5;
+    cursor: pointer;
+}
+
+.botonM:hover{
+    background-color: gold;
+    color: white;
+    border: 1px solid #c0c3c5;
+    cursor: pointer;
+}
+
+#contenedorInicio, #contenedorOpe{
     /* margin-top: 5em; */
     display: flex;
     flex-wrap:wrap;
@@ -196,6 +221,32 @@ main p{
     background-size: cover;
     background-position: center;
 }
+
+.seccionesOpe{
+
+    border-radius: 5%;
+    text-decoration: none;
+    width: 20%;
+    height: 15em;
+    margin: auto;
+    padding: 3em .5em;
+    text-align: center;
+}
+
+.seccionesOpe p{
+    color: black;
+    font-size: 2em;
+}
+
+.seccionesOpe img{
+    width: 10em;
+    height: 10em;
+    padding: .5em;
+}
+
+.seccionesOpe>div:hover p{
+    color: #006FB8;
+} 
 
 .contenedorInstalaciones{
     display: flex;
@@ -254,50 +305,72 @@ table img{
     border-radius: 40%;
 }
 
-table td .botonP{
+table td .botonP, table td .botonE, table td .botonM{
     display: inline-flex;
 }
 
-#formularioDatos label{
+.formularioDatos label{
     font-weight: bold;
     margin-left: 30%;
 }
 
-#formularioDatos p, #formularioDatos input[type="submit"]{
+.formularioDatos p, .formularioDatos input[type="submit"]{
     text-align: left;
     margin-left: 30%;
 }
 
-#formularioDatos input{
+.formularioDatos input{
     display: block;
 }
 
-#formularioDatos button{
+.formularioDatos button{
     margin-left: 30%;
     display: inline-block;
 }
 
-#formularioDatos button:nth-of-type(2){
+.formularioDatos button:nth-of-type(2){
     margin-left: 1em;
 }
 
 /*CONTACTO */
 #formContacto{
-    width: max-content;
-    margin: auto;
     padding: 1em;
+    width: 40%;
+    display: block;
+    margin: 1em auto;
 }
 
-#formContacto input{
+#formRegistro, #formLogin{
+    padding: 1em;
+    width: 20%;
     display: block;
+    margin: 1em auto;
+}
+
+#formContacto input:not(input[type="submit"]), #formRegistro input:not(input[type="submit"]), #formLogin input:not(input[type="submit"]){
     padding: .8em;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    width: 100%;
+    margin: 1em auto;
+    box-sizing: border-box;
+}
+
+#formContacto input[type="submit"], #formRegistro input[type="submit"], #formLogin input[type="submit"]{
+    padding: .8em;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    width: 40%;
+    margin: 1em auto;
+    box-sizing: border-box;
+    border-radius: 0;
 }
 
 #formContacto textarea{
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     resize: none;
     padding: .8em;
+    width: 100%;
+    margin: 1em auto;
+    box-sizing: border-box;
 }
 
 iframe{
@@ -310,11 +383,6 @@ iframe{
     margin: auto;
     border: 1px solid black;
 }
-
-/* #gestionarInstalaciones img{
-    width: 25px;
-    height: 25px;
-} */
 
 footer{
     /* margin-top: 10%; */
@@ -340,50 +408,6 @@ footer a:hover{
 footer li{
     margin-left: 1em ;
 }
-
-
-/* .contenedor{
-    margin: 50% auto;
-    border: 2px solid gray;
-    box-shadow: 5px 5px 5px 2px gray ;
-    background-color: white;
-}
-
-main{
-    padding-bottom: 1px;
-}
-
-form{
-    margin: 30px auto;
-    text-align: center;
-}
-
-label{
-    padding: 0px 30px;
-}
-
-input[type="submit"]{
-    font-size: 18px;
-    margin: 10px auto; 
-    font-family: inherit;
-    background-color: rgba(34,193,195,1);
-    color:white;
-    padding: 8px;
-    border: 1px solid gray;
-}
-
-input[type="submit"]:hover{
-    background-color:white;
-    color:rgba(34,193,195,1);
-    cursor: pointer;
-}
-
-input[type="text"], input[type="password"], input[type="email"]{
-    width: 150px;
-    float: right;
-    margin-right: 30px;
-}*/
-
 
 /* #modal{
     position:absolute;

@@ -2,7 +2,7 @@
 
 
 <h2>Mis datos</h2>
-<form action="index.php?ctl=modificarDatos" method="POST" id="formularioDatos">
+<form action="index.php?ctl=modificarDatos" method="POST" class="formularioDatos">
     <?php if(!isset($_REQUEST["modDatos"]) && !isset($_REQUEST["modPass"])){?>
         <label for="">Nombre completo</label>
         <p><?= $_SESSION['nombre_usuario'] ?></p>
@@ -29,10 +29,10 @@
         <label>Introduce tu contraseña actual:</label>
         <p><input type="password" name="actualPass" id="actualPass" value=""></p>
         <label>Introduce tu contraseña nueva:</label>
-        <p><input type="password" name="newPass" id="newPass" value=""></p>
+        <p><input type="password" name="passNueva" id="passNueva" value=""></p>
         <label>Introduce de nuevo tu contraseña nueva:</label>
-        <p><input type="password" name="newPass" id="newPass" value=""></p>
-        <button class="botonP" type="submit" name="guardarDatos" id="guardarDatos" value="<?= $_SESSION['id_usuario']?>">Guardar cambios</button>
+        <p><input type="password" name="passNueva2" id="passNueva2" value=""></p>
+        <button class="botonP" type="submit" name="guardarDatos2" id="guardarDatos2" value="<?= $_SESSION['id_usuario']?>">Guardar cambios</button>
         <button class="botonP" type="submit" name="botonCancelar" id="botonCancelar">Cancelar</button>
     <?php } ?>
 </form>

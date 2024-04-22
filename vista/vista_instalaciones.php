@@ -27,7 +27,7 @@
 <?php if(($_SESSION) && ($_SESSION['perfil_usuario']=="administrador")){ ?>   
     <a class="botonP" href="index.php?ctl=gestionarInstalaciones">Gestionar</a>
 <?php } if(!$_SESSION){?>
-    <p>Para hacer una reserva es necesario <a class="enlaceP" href="index.php?ctl=login">iniciar sesión</a></p>
+    <p>Para hacer una reserva es necesario <a class="enlaceI" href="index.php?ctl=login">iniciar sesión</a></p>
 <?php } ?>
 
 <?php $contenido = ob_get_clean();?>

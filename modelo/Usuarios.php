@@ -117,18 +117,18 @@ class Usuarios{
         }
     }  
 
-    // public function modificarContra($nuevaContra, $idUsuario){
-    //     try{
-    //         $sql = "UPDATE usuarios SET clave = ? WHERE id=?" ;
-    //         $consulta = Conectar::conexion()->prepare($sql);
-    //         $consulta->bindParam(1, $nuevaContra);
-    //         $consulta->bindParam(2, $idUsuario);
-    //         $consulta->execute();
-    //         $consulta->closeCursor();
-    //     }catch (PDOException $e) {
-    //         exit("<h1><br>Fichero: " . $e->getFile() . "<br>Línea: " . $e->getLine() . "<br>Error: " . $e->getMessage() . "</h1>");
-    //     }
-    // }    
+    public function modificarPass($nuevaPass, $idUsuario){
+        try{
+            $sql = "UPDATE usuarios SET clave = ? WHERE id=?" ;
+            $consulta = Conectar::conexion()->prepare($sql);
+            $consulta->bindParam(1, $nuevaPass);
+            $consulta->bindParam(2, $idUsuario);
+            $consulta->execute();
+            $consulta->closeCursor();
+        }catch (PDOException $e) {
+            exit("<h1><br>Fichero: " . $e->getFile() . "<br>Línea: " . $e->getLine() . "<br>Error: " . $e->getMessage() . "</h1>");
+        }
+    }    
 
     public function verUsuarios(){
         try{
