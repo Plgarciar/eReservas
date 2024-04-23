@@ -48,6 +48,13 @@
             17=>'Contraseña modificada correctamente',
             18=>'Las contraseñas no coinciden',
             19=>'La contraseña actual no es correcta',
+            20=>'La dirección no puede tener una longitud de más de 50 caracteres',
+            21=>'Instalación añadida correctamente',
+            22=>'El formato del horario es incorrecto',
+            23=>'El nombre no puede tener una longitud de más de 20 caracteres',
+            24=>'La instalación ya existe',
+            25=>'Tipo de archivo incorrecto',
+            26=>'El tamaño del archivo es demasiado grande',
         ];
 
         if(isset($errores[$error])){

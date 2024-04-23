@@ -1,6 +1,8 @@
 <?php
     require_once("recursos/funciones.php");
 
+    const LIMITE_BYTES= 2000000; //2M
+
     class ControladorReservas{
 
         public function inicio(){ 
@@ -41,6 +43,19 @@
             include_once ('vista/vista_operaciones.php');
         }
 
+        public static function comprobarInstalacion(){
+            filtrar($_REQUEST);
+            
+            if(isset($_REQUEST['nomInstalacion'])){
+                $datos=Instalaciones::existeInstalacion($_REQUEST['nomInstalacion']);
+                if(count($datos)>0){
+                    return false; //existe la instalacion en la base de datos
+                }else{
+                    return true;//no existe la instalacion en la base de datos
+                }
+            }
+        }
+
         public function gestionarInstalaciones(){
             filtrar($_REQUEST);
             $instalaciones=new Instalaciones();
@@ -48,19 +63,105 @@
             $rutaImagen="./recursos/imagenes/";
             
             if(isset($_REQUEST['nuevaInst'])){
-                $imgGenerica="icono_generico.png";
-                //falta controlar los input
-                if($_REQUEST['imgInstalacion']==""){
-                    $datos=$instalaciones->insertarInstalacion($_REQUEST['nomInstalacion'], $_REQUEST['dirInstalacion'], $_REQUEST['horInstalacion'], $imgGenerica);
-                    header("Location: index.php?ctl=gestionarInstalaciones");
-                }else{
-                    $datos=$instalaciones->insertarInstalacion($_REQUEST['nomInstalacion'], $_REQUEST['dirInstalacion'], $_REQUEST['horInstalacion'], $_REQUEST['imgInstalacion']);
-                    header("Location: index.php?ctl=gestionarInstalaciones");
-                }
+                filtrar($_REQUEST);
+                $imgGenerica="ayto.jfif";
+
+                if($_REQUEST['nomInstalacion']!="" && $_REQUEST['dirInstalacion']!="" && $_REQUEST['horInstalacion']!=""){
+                    //compruebo que la instalacion no existe ya en la base de datos
+                    if(ControladorReservas::comprobarInstalacion($_REQUEST['nomInstalacion'])){
+                        $inst_ok=true;
+                    }else{
+                        $error=24;
+                    }
+
+                    //compruebo que el nombre no tenga más de 20 caracteres y no tenga números
+                    if(mb_strlen($_REQUEST['nomInstalacion']) <= 20){
+                        if(!is_numeric($_REQUEST['nomInstalacion'])){
+                            $nombre_ok=true;
+                        }else{
+                            $error=3;
+                        }
+                    }else{
+                        $error=23;
+                    }
+
+                    //compruebo que la dirección no tenga más de 50 caracteres
+                    if(mb_strlen($_REQUEST['dirInstalacion']) <= 50){
+                        $direccion_ok=true;
+                    }else{
+                        $error=20;
+                    }
+
+                    //compruebo que el horario tenga el formato correcto
+                    if(mb_strlen($_REQUEST['horInstalacion']) <= 11){
+                            $expresionRegular = array("options"=>array("regexp"=>"/^([01]?[0-9]|2[0-3]):[0-5][0-9]-([01]?[0-9]|2[0-3]):[0-5][0-9]$/"));
+
+                            if(filter_var($_REQUEST['horInstalacion'], FILTER_VALIDATE_REGEXP,$expresionRegular)) {
+                                $horario_ok=true;
+                            }else{
+                                $error=22;
+                            }
+                    }else{
+                        $error=22;
+                    }
+
+                    }else{
+                        $error=10;
+                    }
+
+                    
+                    if(isset($inst_ok) && isset($nombre_ok) && isset($direccion_ok) && isset($horario_ok)){
+
+
+                        if($inst_ok && $nombre_ok && $direccion_ok && $horario_ok){
+                            $nombreFoto=$_FILES['imgInstalacion']['name'];
+                            $nombreTemporal=$_FILES['imgInstalacion']['tmp_name'];
+                            $extensiones = array('image/gif', 'image/jpeg', 'image/jpg', 'image/webp', 'image/bmp', 'image/png', 'image/tiff', 'image/jfif');
+                            if(($nombreFoto!="")){
+                                if(in_array(mime_content_type($nombreTemporal),$extensiones)){
+                                    if(filesize($nombreTemporal)<= LIMITE_BYTES){
+                                        $aleatorio=round(microtime(true)*1000);
+                                        $extension=pathinfo($nombreFoto, PATHINFO_EXTENSION);
+                                        $nombreF=pathinfo($nombreFoto, PATHINFO_FILENAME);
+                                        $nombreArchivo=$nombreF.$aleatorio.".".$extension;
+                                        move_uploaded_file($nombreTemporal, $rutaImagen.$nombreF.$aleatorio.".".$extension);
+                                        $_REQUEST['imgInstalacion']=$nombreArchivo;
+                                        $datos=$instalaciones->insertarInstalacion($_REQUEST['nomInstalacion'], $_REQUEST['dirInstalacion'], $_REQUEST['horInstalacion'], $_REQUEST['imgInstalacion']);
+                                        $error=21;
+                                        header("Location: index.php?ctl=gestionarInstalaciones");
+                                    }else{
+                                        $error=27;
+                                        header("Location: index.php?ctl=gestionarInstalaciones");
+                                    }
+                                }else{
+                                    $error=25;
+                                    header("Location: index.php?ctl=gestionarInstalaciones");
+                                }
+                            }else{
+                                $datos=$instalaciones->insertarInstalacion($_REQUEST['nomInstalacion'], $_REQUEST['dirInstalacion'], $_REQUEST['horInstalacion'], $imgGenerica);
+                                $error=21;
+
+                                header("Location: index.php?ctl=gestionarInstalaciones");
+                            }
+                        }else{
+                            header("Location: index.php?ctl=gestionarInstalaciones");
+
+                        }
+                    
+                        $_REQUEST="";
+                    }
+                    
             }
 
             if(isset($_REQUEST['eliminarIns'])){
-                $datos=$instalaciones->eliminarInstalacion($_REQUEST['eliminarIns']);
+                    $fotos=$instalaciones->verImagen($_REQUEST['eliminarIns']);
+                    if($fotos['imagen'] != "ayto.jfif"){
+                        $datos=$instalaciones->eliminarInstalacion($_REQUEST['eliminarIns']);
+                        $variable="./recursos/imagenes/".$fotos['imagen'];
+                        unlink($variable);
+                    }else{
+                        $datos=$instalaciones->eliminarInstalacion($_REQUEST['eliminarIns']);
+                    }
                 header("Location: index.php?ctl=gestionarInstalaciones");
             }
             

@@ -22,8 +22,8 @@
         <p><input type="email" name="newEmail" id="newEmail" value="<?= $_SESSION['email_usuario']?>"></p>
         <label>Alias:</label>
         <p><input type="text" name="newAlias" id="newAlias" value="<?= $_SESSION['alias_usuario']?>"></p>
-        <button class="botonP" type="submit" name="guardarDatos" id="guardarDatos" value="<?= $_SESSION['id_usuario']?>">Guardar cambios</button>
-        <button class="botonP" type="submit" name="botonCancelar" id="botonCancelar">Cancelar</button>
+        <button class="botonG" type="submit" name="guardarDatos" id="guardarDatos" value="<?= $_SESSION['id_usuario']?>">Guardar cambios</button>
+        <button class="botonE" type="submit" name="botonCancelar" id="botonCancelar">Cancelar</button>
     <?php } else if(isset($_REQUEST["modPass"])){?>
         <p>Aquí puedes modificar tu contraseña:</p>
         <label>Introduce tu contraseña actual:</label>
@@ -32,8 +32,8 @@
         <p><input type="password" name="passNueva" id="passNueva" value=""></p>
         <label>Introduce de nuevo tu contraseña nueva:</label>
         <p><input type="password" name="passNueva2" id="passNueva2" value=""></p>
-        <button class="botonP" type="submit" name="guardarDatos2" id="guardarDatos2" value="<?= $_SESSION['id_usuario']?>">Guardar cambios</button>
-        <button class="botonP" type="submit" name="botonCancelar" id="botonCancelar">Cancelar</button>
+        <button class="botonG" type="submit" name="guardarDatos2" id="guardarDatos2" value="<?= $_SESSION['id_usuario']?>">Guardar cambios</button>
+        <button class="botonE" type="submit" name="botonCancelar" id="botonCancelar">Cancelar</button>
     <?php } ?>
 </form>
 

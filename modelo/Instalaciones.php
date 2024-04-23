@@ -23,6 +23,38 @@ class Instalaciones{
         }
    }
 
+   //ver foto instalacion
+   public function verImagen($id){
+    try {
+        $sql = "SELECT imagen FROM instalaciones WHERE id LIKE ?" ;
+        $consulta = Conectar::conexion()->prepare($sql);
+        $consulta->bindParam(1, $id, PDO::PARAM_INT);
+        $instalacion = $consulta->execute();
+        $instalacion=$consulta->fetch(PDO::FETCH_ASSOC);
+        $consulta->closeCursor();
+
+        return $instalacion;
+    } catch (PDOException $e) {
+        exit("<h1><br>Fichero: " . $e->getFile() . "<br>Línea: " . $e->getLine() . "<br>Error: " . $e->getMessage() . "</h1>");
+    }
+    
+}
+
+   public static function existeInstalacion($nombre){
+    try{
+        $sql = "SELECT nombre FROM instalaciones WHERE nombre LIKE ?" ;
+        $consulta = Conectar::conexion()->prepare($sql);
+        $consulta->bindParam(1, $nombre);
+        $resultado = $consulta->execute();
+        $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        $consulta->closeCursor();
+        
+        return $resultado;
+    }catch (PDOException $e) {
+        exit("<h1><br>Fichero: " . $e->getFile() . "<br>Línea: " . $e->getLine() . "<br>Error: " . $e->getMessage() . "</h1>");
+    }
+}
+
     public function insertarInstalacion($nombre,$direccion,$horario,$imagen){
         try{
             $sql = "INSERT INTO instalaciones (nombre,direccion,horario,imagen) VALUES (?,?,?,?)";

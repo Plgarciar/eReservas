@@ -14,7 +14,6 @@
         <td><?= $datos[$indice]["instalacion"]?></td> 
         <td><?= $datos[$indice]["fecha"]?></td> 
         <td><?= $datos[$indice]["horas"]?></td> 
-        <td>Ver detalle</td>
     </tr>
     <?php }?>
 </table>
