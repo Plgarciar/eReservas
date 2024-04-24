@@ -62,6 +62,7 @@
             $datos=$instalaciones->verInstalaciones();
             $rutaImagen="./recursos/imagenes/";
             
+            //añadir nueva instalacion
             if(isset($_REQUEST['nuevaInst'])){
                 filtrar($_REQUEST);
                 $imgGenerica="ayto.jfif";
@@ -153,6 +154,7 @@
                     
             }
 
+            //eliminar instalacion
             if(isset($_REQUEST['eliminarIns'])){
                     $fotos=$instalaciones->verImagen($_REQUEST['eliminarIns']);
                     if($fotos['imagen'] != "ayto.jfif"){
@@ -165,11 +167,46 @@
                 header("Location: index.php?ctl=gestionarInstalaciones");
             }
             
+            //modificar instalacion
             if(isset($_REQUEST['guardarMod'])){
-                $datos=$instalaciones->modificarInstalacion($_REQUEST['nuevoNom'], $_REQUEST['nuevoDir'], $_REQUEST['nuevoHor'], $_REQUEST['nuevoImg'], $_REQUEST['guardarMod']);
-                header("Location: index.php?ctl=gestionarInstalaciones");
+
+                $nombreFoto=$_FILES['nuevoImg']['name'];
+                $nombreTemporal=$_FILES['nuevoImg']['tmp_name'];
+                $extensiones = array('image/gif', 'image/jpeg', 'image/jpg', 'image/webp', 'image/bmp', 'image/png', 'image/tiff', 'image/jfif');
+                if(($nombreFoto!="")){
+                    if(in_array(mime_content_type($nombreTemporal),$extensiones)){
+                        if(filesize($nombreTemporal)<= LIMITE_BYTES){
+                            $aleatorio=round(microtime(true)*1000);
+                            $extension=pathinfo($nombreFoto, PATHINFO_EXTENSION);
+                            $nombreF=pathinfo($nombreFoto, PATHINFO_FILENAME);
+                            $nombreArchivo=$nombreF.$aleatorio.".".$extension;
+                            move_uploaded_file($nombreTemporal, $rutaImagen.$nombreF.$aleatorio.".".$extension);
+                            $_REQUEST['nuevoImg']=$nombreArchivo;
+                            $fotos=$instalaciones->verImagen($_REQUEST['guardarMod']);
+                            if($fotos['imagen'] != "ayto.jfif"){
+                                $variable="./recursos/imagenes/".$fotos['imagen'];
+                                unlink($variable);
+                            }
+                            $datos=$instalaciones->modificarInstalacion($_REQUEST['nuevoNom'], $_REQUEST['nuevoDir'], $_REQUEST['nuevoHor'], $_REQUEST['nuevoImg'], $_REQUEST['guardarMod']);
+                            $error=21;
+                            header("Location: index.php?ctl=gestionarInstalaciones");
+                        }else{
+                            $error=27;
+                            header("Location: index.php?ctl=gestionarInstalaciones");
+                        }
+                    }else{
+                        $error=25;
+                        header("Location: index.php?ctl=gestionarInstalaciones");
+                    }
+
+                }else{
+                    $datos=$instalaciones->modificarInstalacion2($_REQUEST['nuevoNom'], $_REQUEST['nuevoDir'], $_REQUEST['nuevoHor'], $_REQUEST['guardarMod']);
+                    header("Location: index.php?ctl=gestionarInstalaciones");
+
+                }
             }
 
+            //cancelar
             if(isset($_REQUEST['botonCancelar'])){
                 header("Location: index.php?ctl=gestionarInstalaciones");
             }

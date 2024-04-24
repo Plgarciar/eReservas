@@ -351,11 +351,16 @@ table td .botonP, table td .botonE, table td .botonM{
     margin: 1em auto;
 }
 
-#formRegistro, #formLogin{
+#formRegistro, #formLogin, #formReservas{
     padding: 1em;
     width: 20%;
     display: block;
     margin: 1em auto;
+}
+
+#formReservas label{
+    
+
 }
 
 #formContacto input:not(input[type="submit"]), #formRegistro input:not(input[type="submit"]), #formLogin input:not(input[type="submit"]){

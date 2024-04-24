@@ -86,6 +86,21 @@ class Instalaciones{
         }
     }
 
+    public function modificarInstalacion2($nombre, $direccion, $horario, $id){
+        try{
+            $sql = "UPDATE instalaciones SET nombre = ?, direccion = ?, horario = ? WHERE id=?" ;
+            $consulta = Conectar::conexion()->prepare($sql);
+            $consulta->bindParam(1, $nombre);
+            $consulta->bindParam(2, $direccion);
+            $consulta->bindParam(3, $horario);
+            $consulta->bindParam(4, $id);
+            $consulta->execute();
+            $consulta->closeCursor();
+        }catch (PDOException $e) {
+            exit("<h1><br>Fichero: " . $e->getFile() . "<br>Línea: " . $e->getLine() . "<br>Error: " . $e->getMessage() . "</h1>");
+        }
+    }
+
     public function eliminarInstalacion($id){
         try{
             $sql = "DELETE FROM instalaciones WHERE id = ?";
