@@ -1,7 +1,9 @@
 <?php ob_start(); ?>
 
 <h2>Mis reservas</h2>
-
+<?php if(count($datos) < 1){ ?>
+        <p>No has realizado ninguna reserva</p>
+    <?php }else { ?>
 <table id="reservasUsuario">
     <th>Instalacion</th>
     <th>Fecha</th>
@@ -17,7 +19,7 @@
     </tr>
     <?php }?>
 </table>
-
+<?php } ?>
 <?php $contenido = ob_get_clean();?>
 
 <?php include 'estructura.php' ;?>

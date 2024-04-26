@@ -2,7 +2,9 @@
 
 
 <h2>Gestion Instalaciones</h2>
-
+<?php if(count($datos) < 1){ ?>
+        <p>No existen instalaciones</p>
+    <?php }else { ?>
 <form action="index.php?ctl=gestionarInstalaciones" method="post" enctype="multipart/form-data">
 
     <?php if(!isset($_REQUEST['anadirInstalacion'])){ 
@@ -59,6 +61,7 @@
         </tr>
 </form>
 </table>
+<?php } ?>
 <a class="enlaceP" href="index.php?ctl=operaciones"> &larr; Volver a operaciones</a>
 <?php $contenido = ob_get_clean();?>
 

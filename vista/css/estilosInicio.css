@@ -358,10 +358,10 @@ table td .botonP, table td .botonE, table td .botonM{
     margin: 1em auto;
 }
 
-#formReservas label{
+/* #formReservas label{
     
 
-}
+} */
 
 #formContacto input:not(input[type="submit"]), #formRegistro input:not(input[type="submit"]), #formLogin input:not(input[type="submit"]){
     padding: .8em;

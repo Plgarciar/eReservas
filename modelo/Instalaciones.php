@@ -23,22 +23,39 @@ class Instalaciones{
         }
    }
 
-   //ver foto instalacion
-   public function verImagen($id){
-    try {
-        $sql = "SELECT imagen FROM instalaciones WHERE id LIKE ?" ;
-        $consulta = Conectar::conexion()->prepare($sql);
-        $consulta->bindParam(1, $id, PDO::PARAM_INT);
-        $instalacion = $consulta->execute();
-        $instalacion=$consulta->fetch(PDO::FETCH_ASSOC);
-        $consulta->closeCursor();
+    //ver foto instalacion
+    public function verImagen($id){
+        try {
+            $sql = "SELECT imagen FROM instalaciones WHERE id LIKE ?" ;
+            $consulta = Conectar::conexion()->prepare($sql);
+            $consulta->bindParam(1, $id, PDO::PARAM_INT);
+            $instalacion = $consulta->execute();
+            $instalacion=$consulta->fetch(PDO::FETCH_ASSOC);
+            $consulta->closeCursor();
 
-        return $instalacion;
-    } catch (PDOException $e) {
-        exit("<h1><br>Fichero: " . $e->getFile() . "<br>Línea: " . $e->getLine() . "<br>Error: " . $e->getMessage() . "</h1>");
-    }
+            return $instalacion;
+        } catch (PDOException $e) {
+            exit("<h1><br>Fichero: " . $e->getFile() . "<br>Línea: " . $e->getLine() . "<br>Error: " . $e->getMessage() . "</h1>");
+        }
     
-}
+    }
+
+    //ver nombre instalacion
+    public function verNombre($id){
+        try {
+            $sql = "SELECT nombre FROM instalaciones WHERE id LIKE ?" ;
+            $consulta = Conectar::conexion()->prepare($sql);
+            $consulta->bindParam(1, $id, PDO::PARAM_INT);
+            $instalacion = $consulta->execute();
+            $instalacion=$consulta->fetch(PDO::FETCH_ASSOC);
+            $consulta->closeCursor();
+
+            return $instalacion;
+        } catch (PDOException $e) {
+            exit("<h1><br>Fichero: " . $e->getFile() . "<br>Línea: " . $e->getLine() . "<br>Error: " . $e->getMessage() . "</h1>");
+        }
+    
+    }
 
    public static function existeInstalacion($nombre){
     try{

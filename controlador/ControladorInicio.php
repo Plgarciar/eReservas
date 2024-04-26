@@ -29,7 +29,6 @@
             
             if(isset($_REQUEST['email'])){
                 $datos=Usuarios::existeEmail($_REQUEST['email']);
-                $datos2=Usuarios::existeEmail($_REQUEST['newEmail']);
 
                 if(count($datos)>0){
                     return false; //existe el email en la base de datos

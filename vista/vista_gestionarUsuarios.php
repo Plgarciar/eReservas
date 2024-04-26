@@ -2,7 +2,9 @@
 
 
 <h2>Gestion Usuarios</h2>
-
+<?php if(count($datos) < 1){ ?>
+        <p>No existen usuarios registrados</p>
+    <?php }else { ?>
 <table id="gestionarUsuarios">
     <th>DNI</th>
     <th>Nombre</th>
@@ -15,7 +17,7 @@
     </tr>
     <?php }?>
 </table>
-
+<?php } ?>
 <a class="enlaceP" href="index.php?ctl=operaciones"> &larr; Volver a operaciones</a>
 
 <?php $contenido = ob_get_clean();?>

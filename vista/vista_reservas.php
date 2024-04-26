@@ -1,6 +1,9 @@
 <?php ob_start();?>
 
 <h2>Página de reservas</h2>
+<?php if(count($datos) < 1){ ?>
+        <p>No hay instalaciones para reservar</p>
+    <?php }else { ?>
 <form action="" method="post" id="formReservas">
     <label for="">Selecciona una instalación</label>
     <select name="" id="">
@@ -19,7 +22,7 @@
         <?php } ?> -->
     <input type="submit" value="Reservar">
 </form>
-
+<?php } ?>
 <?php $contenido = ob_get_clean();?>
 
 <?php include 'estructura.php' ;?>
