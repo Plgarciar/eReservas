@@ -24,8 +24,34 @@
         
         public function reservas(){
             $instalaciones=new Instalaciones();
+            $reservas=new Reservas();
             $datos=$instalaciones->verInstalaciones();
-            // $instalacion=$_REQUEST['reser'];
+            
+            if(isset($_REQUEST['reservaInst'])){
+                //compruebo que se ha seleccionado la fecha
+                if($_REQUEST['dia']!=""){
+                    $fecha_ok=true;
+                }else{
+                    $error=31;
+                }
+                
+                //compruebo que se ha seleccionado una instalacion
+                if(is_numeric($_REQUEST['seleInst'])){
+                    $inst_ok=true;
+                }else{
+                    $error=30;
+                }
+
+                
+
+                //inserto la reserva
+                if(isset($inst_ok) && isset($fecha_ok)){
+                    $contenido=$reservas->insertarReserva($_REQUEST['seleInst'],$_REQUEST['reservaInst'],1,$_REQUEST['dia']);
+                    $error=28;
+                }
+            }else{
+                $error=29;
+            }
             
             include('vista/vista_reservas.php');
         }
@@ -35,6 +61,11 @@
             $reservas=new Reservas();
             $datos=$reservas->verReservasUsuario($idUsuario);
             
+            if(isset($_REQUEST['anular'])){
+                $reservas->eliminarReserva($_REQUEST['anular']);
+                header("Location: index.php?ctl=reservasUsuario");
+            }else{
+            }
             include('vista/vista_reservasUsuario.php');
         }
 
@@ -185,9 +216,6 @@
                         $Ninst_ok=true;
                     }
 
-                        
-                    
-
                     //compruebo que el nombre no tenga más de 20 caracteres y no tenga números
                     if(mb_strlen($_REQUEST['nuevoNom']) <= 20){
                         if(!is_numeric($_REQUEST['nuevoNom'])){
@@ -269,7 +297,10 @@
 
         public function gestionarReservas(){
             $reservas=new Reservas();
+            $instalaciones=new Instalaciones();
+            
             $datos=$reservas->verReservas();
+            $datos2=$instalaciones->verInstalaciones();
 
             include_once ('vista/vista_gestionarReservas.php');
         }
@@ -280,4 +311,5 @@
 
             include_once ('vista/vista_gestionarUsuarios.php');
         }
+
     }

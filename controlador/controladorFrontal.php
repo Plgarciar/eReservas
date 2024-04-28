@@ -72,6 +72,11 @@ $map=array(
         'controller' => 'ControladorReservas',
         'action' => 'gestionarUsuarios', 
     ),
+
+    'generarInforme' => array(
+        'controller' => 'ControladorPDF',
+        'action' => 'generarInforme', 
+    ),
    
 
 );

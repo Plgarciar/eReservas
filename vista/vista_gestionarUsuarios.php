@@ -1,7 +1,7 @@
 <?php ob_start(); ?>
 
 
-<h2>Gestion Usuarios</h2>
+<h2>Gestión Usuarios</h2>
 <?php if(count($datos) < 1){ ?>
         <p>No existen usuarios registrados</p>
     <?php }else { ?>

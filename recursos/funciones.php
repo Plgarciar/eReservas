@@ -55,6 +55,11 @@
             24=>'La instalación ya existe',
             25=>'Tipo de archivo incorrecto',
             26=>'El tamaño del archivo es demasiado grande',
+            27=>'',
+            28=>'Reserva realizada correctamente',
+            29=>'Error al realizar la reserva',
+            30=>'Tiene que seleccionar una instalación',
+            31=>'Tiene que seleccionar una fecha',
         ];
 
         if(isset($errores[$error])){

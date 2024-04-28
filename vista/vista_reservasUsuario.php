@@ -8,15 +8,17 @@
     <th>Instalacion</th>
     <th>Fecha</th>
     <th>Hora</th>
+    <th>Estado</th>
     <th></th>
     <?php foreach($datos as $indice=>$contenido){?>
     <tr>
         <td><?= $datos[$indice]["instalacion"]?></td> 
         <td><?= $datos[$indice]["fecha"]?></td> 
         <td><?= $datos[$indice]["horas"]?></td> 
-        <!-- <td><a >Ver detalle</a></td> -->
-        <td><input type="submit" class="botonP" value="Ver detalle" id="detalle" name="detalle"></td>
-    </tr>
+        <td><?= $datos[$indice]["estado"]?></td> 
+        <form action="index.php?ctl=reservasUsuario" method="post">
+            <td><button type="submit" class="botonE" value="<?= $datos[$indice]["idReserva"] ?>" id="anular" name="anular">Anular</button></td>
+        </form>
     <?php }?>
 </table>
 <?php } ?>

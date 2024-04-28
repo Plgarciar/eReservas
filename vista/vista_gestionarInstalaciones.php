@@ -1,7 +1,7 @@
 <?php ob_start();?>
 
 
-<h2>Gestion Instalaciones</h2>
+<h2>Gestión Instalaciones</h2>
 <?php if(count($datos) < 1){ ?>
         <p>No existen instalaciones</p>
     <?php }else { ?>
@@ -17,7 +17,7 @@
                 <p class="errores"><?=mostrarError($error)?></p>
                 <?php ;} else {echo "";};?> 
     <?php } else { ?>
-<table id="gestionarInstalaciones">
+<table class="gestionarInstalaciones addinstalacion">
 
         <th>Nombre</th>
         <th>Dirección</th>
@@ -32,9 +32,9 @@
             <td><input class="botonG" type="submit" name="nuevaInst" id="nuevaInst" value="Guardar" ></td>
             <td><button class="botonE" type="submit" name="botonCancelar" id="botonCancelar">Cancelar</button></td>
         </tr>
-        <tr class="espacio"><td><br></td></tr>
+        <tr class="espacio"></tr>
     <?php }?>
-    <table id="gestionarInstalaciones">
+    <table class="gestionarInstalaciones">
         <th>Nombre</th>
         <th>Dirección</th>
         <th>Horario</th>
