@@ -102,14 +102,14 @@ class Usuarios{
         }
     }
 
-    public function modificarDatos($nuevoNombre, $nuevoEmail, $nuevoAlias, $idUsuario){
+    public function modificarDatos($nombre, $email, $alias, $id){
         try{
             $sql = "UPDATE usuarios SET nombre = ?, email= ?, alias= ? WHERE id=?" ;
             $consulta = Conectar::conexion()->prepare($sql);
-            $consulta->bindParam(1, $nuevoNombre);
-            $consulta->bindParam(2, $nuevoEmail);
-            $consulta->bindParam(3, $nuevoAlias);
-            $consulta->bindParam(4, $idUsuario);
+            $consulta->bindParam(1, $nombre);
+            $consulta->bindParam(2, $email);
+            $consulta->bindParam(3, $alias);
+            $consulta->bindParam(4, $id);
             $consulta->execute();
             $consulta->closeCursor();
         }catch (PDOException $e) {
@@ -117,12 +117,12 @@ class Usuarios{
         }
     }  
 
-    public function modificarPass($nuevaPass, $idUsuario){
+    public function modificarPass($clave, $id){
         try{
             $sql = "UPDATE usuarios SET clave = ? WHERE id=?" ;
             $consulta = Conectar::conexion()->prepare($sql);
-            $consulta->bindParam(1, $nuevaPass);
-            $consulta->bindParam(2, $idUsuario);
+            $consulta->bindParam(1, $clave);
+            $consulta->bindParam(2, $id);
             $consulta->execute();
             $consulta->closeCursor();
         }catch (PDOException $e) {

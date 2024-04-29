@@ -7,6 +7,7 @@ class Reservas{
     public $id_usuario;
     public $id_intervalo;
     public $fecha;  
+    public $estado;  
 
     public function verReservas(){
         try{
@@ -23,11 +24,11 @@ class Reservas{
         }
     }
 
-    public function verReservasUsuario($idUsuario){
+    public function verReservasUsuario($id_usuario){
         try{
             $sql = "SELECT instalaciones.nombre as instalacion, fecha, intervalos.horas as horas, estado, reservas.id_reserva as idReserva FROM reservas, instalaciones, intervalos where id_instalacion=instalaciones.id and id_intervalo=intervalos.id and id_usuario=? ORDER BY idReserva ASC" ;
             $consulta = Conectar::conexion()->prepare($sql);
-            $consulta->bindParam(1, $idUsuario);
+            $consulta->bindParam(1, $id_usuario);
             $reservaUsuario = $consulta->execute();
             $reservaUsuario = $consulta->fetchAll(PDO::FETCH_ASSOC);
             
@@ -39,11 +40,11 @@ class Reservas{
         }
     }
 
-    public function verReservasInstalacion($idInstalacion){
+    public function verReservasInstalacion($id_instalacion){
         try{
             $sql = "SELECT instalaciones.nombre as instalacion, reservas.id_reserva as idReserva, usuarios.nombre as usuario, fecha, intervalos.horas as horas, estado FROM reservas, instalaciones, intervalos, usuarios where id_usuario=usuarios.id and id_instalacion=instalaciones.id and id_intervalo=intervalos.id and instalaciones.id=?" ;
             $consulta = Conectar::conexion()->prepare($sql);
-            $consulta->bindParam(1, $idInstalacion);
+            $consulta->bindParam(1, $id_instalacion);
             $reservaUsuario = $consulta->execute();
             $reservaUsuario = $consulta->fetchAll(PDO::FETCH_ASSOC);
             
@@ -55,13 +56,13 @@ class Reservas{
         }
     }
 
-    public function insertarReserva($idInstalacion,$idUsuario,$idIntervalo,$fecha){
+    public function insertarReserva($id_instalacion,$id_usuario,$id_intervalo,$fecha){
         try{
             $sql = "INSERT INTO reservas (id_instalacion,id_usuario,id_intervalo,fecha) VALUES (?,?,?,?)";
             $consulta = Conectar::conexion()->prepare($sql);
-            $consulta->bindParam(1, $idInstalacion);
-            $consulta->bindParam(2, $idUsuario);
-            $consulta->bindParam(3, $idIntervalo);
+            $consulta->bindParam(1, $id_instalacion);
+            $consulta->bindParam(2, $id_usuario);
+            $consulta->bindParam(3, $id_intervalo);
             $consulta->bindParam(4, $fecha);
             $consulta->execute();
             $consulta->closeCursor();
@@ -70,11 +71,11 @@ class Reservas{
         }
    }
 
-   public function eliminarReserva($id){
+   public function eliminarReserva($id_reserva){
     try{
         $sql = "DELETE FROM reservas WHERE id_reserva = ?";
         $consulta = Conectar::conexion()->prepare($sql);
-        $consulta->bindParam(1, $id, PDO::PARAM_INT);
+        $consulta->bindParam(1, $id_reserva, PDO::PARAM_INT);
         $consulta->execute();
         $consulta->closeCursor();
     }catch (PDOException $e) {

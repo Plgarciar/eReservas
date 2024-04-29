@@ -54,7 +54,6 @@
            
             if(isset($_REQUEST['alias'])){
                 $datos=Usuarios::existeAlias($_REQUEST['alias']);
-                $datos2=Usuarios::existeAlias($_REQUEST['newAlias']);
 
                 if(count($datos)>0){
                     return false; //existe el alias en la base de datos
