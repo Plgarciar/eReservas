@@ -30,9 +30,16 @@
         <td><?= $datos[$indice]["instalacion"]?></td> 
         <td><?= $datos[$indice]["fecha"]?></td> 
         <td><?= $datos[$indice]["horas"]?></td> 
-        <td><?= $datos[$indice]["estado"]?></td> 
-        <td><button type="submit" class="botonG" id="informe" name="informe" value="">Aceptar</button></td>
-        <td><button type="submit" class="botonE" id="informe" name="informe" value="">Rechazar</button></td>
+        <td class="estado"><?= $datos[$indice]["estado"]?></td> 
+        <?php if($datos[$indice]["estado"]=="pendiente"){ ?>
+        <form action="index.php?ctl=gestionarReservas" method="post" id="formEstado">
+            <td><button type="submit" class="botonG" id="aceptarR" name="aceptarR" value="<?=$datos[$indice]["idReserva"]?>">Aceptar</button></td>
+            <td><button type="submit" class="botonE" id="rechazarR" name="rechazarR" value="<?=$datos[$indice]["idReserva"]?>">Rechazar</button></td>
+        </form>
+        <?php }else{ ?>
+            <td><button type="submit" class="botonG esconderBoton" id="aceptarR" name="aceptarR" value="">Aceptar</button></td>
+            <td><button type="submit" class="botonE esconderBoton" id="rechazarR" name="rechazarR" value="">Rechazar</button></td>
+        <?php } ?>
     </tr>
     <?php }?>
 </table>

@@ -9,7 +9,6 @@
         <style>
             h1{
                 text-align: center;
-            
             }
 
             div{
@@ -18,6 +17,7 @@
                 width: 60%;
                 margin: 2em auto;
                 padding: 0;
+                page-break-inside: avoid;
             }
 
             div h3{
@@ -25,8 +25,7 @@
                 margin: 0;
                 background-color: darkblue;
                 color: white;
-            }
-            
+            }        
         </style>
     </head>
 
@@ -41,7 +40,7 @@
             
             <?php foreach($datosR as $indice=>$contenido){?>
             <div id="reservasUsuario">
-                <h3>Id reserva: <?= $datosR[$indice]['idReserva']?></h3>
+                <h3>#Reserva <?= $datosR[$indice]['idReserva']?></h3>
                 <p>Usuario: <?= $datosR[$indice]["usuario"]?></p> 
                 <p>Fecha: <?= $datosR[$indice]["fecha"]?></p> 
                 <p>Hora: <?= $datosR[$indice]["horas"]?></p> 

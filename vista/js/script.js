@@ -22,3 +22,19 @@
 // }
 
 // aInstalacion.addEventListener("click", ventanaEmergente);
+
+
+let estado = document.querySelectorAll(".estado");
+
+for(let i=0;i<estado.length;i++){
+    if(estado[i].textContent=="pendiente"){
+        estado[i].style.backgroundColor="rgb(236, 206, 32)";
+        estado[i].style.color="white";
+    }else if(estado[i].textContent=="aceptada"){
+        estado[i].style.backgroundColor="green";
+        estado[i].style.color="white";
+    }else if(estado[i].textContent=="rechazada"){
+        estado[i].style.backgroundColor="red";
+        estado[i].style.color="white";
+    }
+}

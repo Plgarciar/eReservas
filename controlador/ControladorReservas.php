@@ -21,13 +21,36 @@
         public function contacto(){ 
             include ('vista/vista_contacto.php');
         }      
+
+        public static function comprobarReserva(){
+            filtrar($_REQUEST);
+            
+            if(isset($_REQUEST['seleInst']) && isset($_REQUEST['dia']) && isset($_REQUEST['seleHora'])){
+                $datos=Reservas::existeReserva($_REQUEST['seleInst'], $_REQUEST['seleHora'], $_REQUEST['dia']);
+                if(count($datos)>0){
+                    return false; //existe la instalacion en la base de datos
+                }else{
+                    return true;//no existe la instalacion en la base de datos
+                }
+            }
+           
+        }
         
         public function reservas(){
             $instalaciones=new Instalaciones();
             $reservas=new Reservas();
+            $intervalos=new Intervalos();
             $datos=$instalaciones->verInstalaciones();
+            $datos2=$intervalos->verIntervalos();
             
             if(isset($_REQUEST['reservaInst'])){
+                //controlar los intervalos
+                if(is_numeric($_REQUEST['seleHora'])){
+                    $hora_ok=true;
+                }else{
+                    $error=32;
+                }
+                
                 //compruebo que se ha seleccionado la fecha
                 if($_REQUEST['dia']!=""){
                     $fecha_ok=true;
@@ -42,15 +65,16 @@
                     $error=30;
                 }
 
-                
-
                 //inserto la reserva
-                if(isset($inst_ok) && isset($fecha_ok)){
-                    $contenido=$reservas->insertarReserva($_REQUEST['seleInst'],$_REQUEST['reservaInst'],1,$_REQUEST['dia']);
-                    $error=28;
+                if(isset($inst_ok) && isset($fecha_ok) && isset($hora_ok)){
+                    if(ControladorReservas::comprobarReserva()){
+                        $reservas->insertarReserva($_REQUEST['seleInst'],$_REQUEST['reservaInst'],$_REQUEST['seleHora'],$_REQUEST['dia']);
+                        $error=28;
+                       
+                    }else{
+                        $error=33;
+                    }
                 }
-            }else{
-                $error=29;
             }
             
             include('vista/vista_reservas.php');
@@ -165,10 +189,11 @@
                                     $nombreArchivo=$nombreF.$aleatorio.".".$extension;
                                     move_uploaded_file($nombreTemporal, $rutaImagen.$nombreF.$aleatorio.".".$extension);
                                     $_REQUEST['imgInstalacion']=$nombreArchivo;
-                                    $datos=$instalaciones->insertarInstalacion($_REQUEST['nomInstalacion'], $_REQUEST['dirInstalacion'], $_REQUEST['horInstalacion'], $_REQUEST['imgInstalacion']);
+                                    $instalaciones->insertarInstalacion($_REQUEST['nomInstalacion'], $_REQUEST['dirInstalacion'], $_REQUEST['horInstalacion'], $_REQUEST['imgInstalacion']);
                                     $error=21;
+                                    header("Location: index.php?ctl=gestionarInstalaciones");
                                 }else{
-                                    $error=27;
+                                    $error=26;
                                     header("Location: index.php?ctl=gestionarInstalaciones");
                                 }
                             }else{
@@ -176,7 +201,7 @@
                                 header("Location: index.php?ctl=gestionarInstalaciones");
                             }
                         }else{
-                            $datos=$instalaciones->insertarInstalacion($_REQUEST['nomInstalacion'], $_REQUEST['dirInstalacion'], $_REQUEST['horInstalacion'], $imgGenerica);
+                            $instalaciones->insertarInstalacion($_REQUEST['nomInstalacion'], $_REQUEST['dirInstalacion'], $_REQUEST['horInstalacion'], $imgGenerica);
                             $error=21;
                             header("Location: index.php?ctl=gestionarInstalaciones");
                         }
@@ -191,11 +216,11 @@
             if(isset($_REQUEST['eliminarIns'])){
                     $fotos=$instalaciones->verImagen($_REQUEST['eliminarIns']);
                     if($fotos['imagen'] != "ayto.jfif"){
-                        $datos=$instalaciones->eliminarInstalacion($_REQUEST['eliminarIns']);
+                        $instalaciones->eliminarInstalacion($_REQUEST['eliminarIns']);
                         $variable="./recursos/imagenes/".$fotos['imagen'];
                         unlink($variable);
                     }else{
-                        $datos=$instalaciones->eliminarInstalacion($_REQUEST['eliminarIns']);
+                        $instalaciones->eliminarInstalacion($_REQUEST['eliminarIns']);
                     }
                 header("Location: index.php?ctl=gestionarInstalaciones");
             }
@@ -212,7 +237,6 @@
                             $error=24;
                         }
                     }else{
-                        // $n['nombre']==$_REQUEST['nuevoNom'];
                         $Ninst_ok=true;
                     }
 
@@ -249,7 +273,6 @@
                 }
 
                 if(isset($Ninst_ok) && isset($Nnombre_ok) && isset($Ndireccion_ok) && isset($Nhorario_ok)){
-                // if(isset($Nnombre_ok) && isset($Ndireccion_ok) && isset($Nhorario_ok)){
                     $nombreFoto=$_FILES['nuevoImg']['name'];
                     $nombreTemporal=$_FILES['nuevoImg']['tmp_name'];
                     $extensiones = array('image/gif', 'image/jpeg', 'image/jpg', 'image/webp', 'image/bmp', 'image/png', 'image/tiff', 'image/jfif');
@@ -267,24 +290,22 @@
                                     $variable="./recursos/imagenes/".$fotos['imagen'];
                                     unlink($variable);
                                 }
-                                $datos=$instalaciones->modificarInstalacion($_REQUEST['nuevoNom'], $_REQUEST['nuevoDir'], $_REQUEST['nuevoHor'], $_REQUEST['nuevoImg'], $_REQUEST['guardarMod']);
-                                $error=21;
-                                header("Location: index.php?ctl=gestionarInstalaciones");
+                                $instalaciones->modificarInstalacion($_REQUEST['nuevoNom'], $_REQUEST['nuevoDir'], $_REQUEST['nuevoHor'], $_REQUEST['nuevoImg'], $_REQUEST['guardarMod']);
+                                $error=16;
                             }else{
-                                $error=27;
-                                header("Location: index.php?ctl=gestionarInstalaciones");
+                                $error=26;
                             }
                         }else{
                             $error=25;
-                            header("Location: index.php?ctl=gestionarInstalaciones");
                         }
-
                     }else{
-                        $datos=$instalaciones->modificarInstalacion2($_REQUEST['nuevoNom'], $_REQUEST['nuevoDir'], $_REQUEST['nuevoHor'], $_REQUEST['guardarMod']);
-                        header("Location: index.php?ctl=gestionarInstalaciones");
+                        $instalaciones->modificarInstalacion2($_REQUEST['nuevoNom'], $_REQUEST['nuevoDir'], $_REQUEST['nuevoHor'], $_REQUEST['guardarMod']);
+                        $error=16;
                     }
                 }
-                
+               
+                header("Location: index.php?ctl=gestionarInstalaciones");
+               
             }
 
             //cancelar
@@ -301,6 +322,18 @@
             
             $datos=$reservas->verReservas();
             $datos2=$instalaciones->verInstalaciones();
+
+            //aceptar la reserva
+            if(isset($_REQUEST['aceptarR'])){
+                $reservas->cambiarEstadoReserva("aceptada", $_REQUEST['aceptarR']);
+                header("Location: index.php?ctl=gestionarReservas");
+            }
+
+            //rechazar la reserva
+            if(isset($_REQUEST['rechazarR'])){
+                $reservas->cambiarEstadoReserva("rechazada", $_REQUEST['rechazarR']);
+                header("Location: index.php?ctl=gestionarReservas");
+            }
 
             include_once ('vista/vista_gestionarReservas.php');
         }

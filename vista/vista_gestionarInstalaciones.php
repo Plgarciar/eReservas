@@ -2,7 +2,7 @@
 
 
 <h2>Gestión Instalaciones</h2>
-<?php if(count($datos) < 1){ ?>
+    <?php if(count($datos) < 1){ ?>
         <p>No existen instalaciones</p>
     <?php }else { ?>
 <form action="index.php?ctl=gestionarInstalaciones" method="post" enctype="multipart/form-data">

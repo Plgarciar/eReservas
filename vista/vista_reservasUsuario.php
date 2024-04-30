@@ -15,7 +15,7 @@
         <td><?= $datos[$indice]["instalacion"]?></td> 
         <td><?= $datos[$indice]["fecha"]?></td> 
         <td><?= $datos[$indice]["horas"]?></td> 
-        <td><?= $datos[$indice]["estado"]?></td> 
+        <td class="estado"><?= $datos[$indice]["estado"]?></td> 
         <form action="index.php?ctl=reservasUsuario" method="post">
             <td><button type="submit" class="botonE" value="<?= $datos[$indice]["idReserva"] ?>" id="anular" name="anular">Anular</button></td>
         </form>
