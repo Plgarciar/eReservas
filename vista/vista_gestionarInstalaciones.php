@@ -51,10 +51,10 @@
             <button class="botonE" type="submit" name="eliminarIns" id="eliminarIns" value="<?= $datos[$indice]["id"]?>">Eliminar</button>
         </td>
         <?php } else if (($_REQUEST['modificarIns'])==$datos[$indice]["id"]){ ?>
-        <td><input type="text" name="nuevoNom" id="nuevoNom" value=<?= $datos[$indice]["nombre"]?>></td> 
-        <td><input type="text" name="nuevoDir" id="nuevoDir" value=<?= $datos[$indice]["direccion"]?>></td>
-        <td><input type="text" name="nuevoHor" id="nuevoHor" value=<?= $datos[$indice]["horario"]?>></td>
-        <td><input type="file" name="nuevoImg" id="nuevoImg" value=<?= $datos[$indice]["imagen"]?>></td>
+        <td><input type="text" name="nuevoNom" id="nuevoNom" value="<?= $datos[$indice]["nombre"]?>"></td> 
+        <td><input type="text" name="nuevoDir" id="nuevoDir" value="<?= $datos[$indice]["direccion"]?>"></td>
+        <td><input type="text" name="nuevoHor" id="nuevoHor" value="<?= $datos[$indice]["horario"]?>"></td>
+        <td><input type="file" name="nuevoImg" id="nuevoImg" value=""></td>
         <td><button class="botonG" type="submit" name="guardarMod" id="guardarMod" value="<?= $datos[$indice]["id"]?>">Guardar</button></td>
         <td><button class="botonE" type="submit" name="botonCancelar" id="botonCancelar">Cancelar</button></td>
         <?php } }?>   

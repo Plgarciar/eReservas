@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-04-2024 a las 18:13:49
+-- Tiempo de generación: 01-05-2024 a las 12:53:31
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.1.12
 
@@ -40,10 +40,10 @@ CREATE TABLE `instalaciones` (
 --
 
 INSERT INTO `instalaciones` (`id`, `nombre`, `direccion`, `horario`, `imagen`) VALUES
-(4, 'Fronton', 'Calvarrasa', '09:00-22:00', 'fronton.JPG'),
-(5, 'Escuelas', 'Calvarrasa', '09:00-22:00', 'ayto.jfif'),
-(6, 'Biblioteca-Aula', 'Calvarrasa', '09:00-22:00', 'biblioteca.jpg'),
-(15, 'Pista', 'Calvarrasa', '09:00-22:00', 'padel.jpg');
+(4, 'Frontón Municipal', 'C. Laguna, 1, Calvarrasa de Abajo', '09:00-22:00', 'fronton.JPG'),
+(5, 'Escuelas Viejas', 'Pl. Mayor, Calvarrasa de Abajo', '09:00-22:00', 'ayto.jfif'),
+(6, 'Biblioteca-Aula de informática', 'Pl. Mayor, Calvarrasa de Abajo', '09:00-22:00', 'biblioteca.jpg'),
+(15, 'Pista de pádel', 'C. Sur, 16, Calvarrasa de Abajo', '09:00-22:00', 'padel.jpg');
 
 -- --------------------------------------------------------
 
@@ -64,7 +64,16 @@ INSERT INTO `intervalos` (`id`, `horas`) VALUES
 (1, '9:00-10:00'),
 (2, '10:00-11:00'),
 (3, '11:00-12:00'),
-(4, '12:00-13:00');
+(4, '12:00-13:00'),
+(5, '13:00-14:00'),
+(6, '14:00-15:00'),
+(7, '15:00-16:00'),
+(8, '16:00-17:00'),
+(9, '17:00-18:00'),
+(10, '18:00-19:00'),
+(11, '19:00-20:00'),
+(12, '20:00-21:00'),
+(13, '21:00-22:00');
 
 -- --------------------------------------------------------
 
@@ -86,7 +95,10 @@ CREATE TABLE `reservas` (
 --
 
 INSERT INTO `reservas` (`id_reserva`, `id_instalacion`, `id_usuario`, `id_intervalo`, `fecha`, `estado`) VALUES
-(26, 5, 5, 1, '2024-04-26', 'pendiente');
+(26, 5, 5, 1, '2024-04-26', 'rechazada'),
+(32, 5, 5, 1, '2024-05-04', 'aceptada'),
+(39, 15, 10, 7, '2024-05-03', 'pendiente'),
+(40, 4, 10, 2, '2024-05-05', 'pendiente');
 
 -- --------------------------------------------------------
 
@@ -109,9 +121,13 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `dni`, `nombre`, `email`, `alias`, `clave`, `perfil`) VALUES
-(4, '12345678z', 'Administrador', 'administrador@hola.com', 'admin', '$2y$10$MEf/iqAz6BE2ZRt7fiJoK.EEpeNqlUHS0W4Gokop3qV358z4zkfQq', 'administrador'),
-(5, '11111111o', 'pepe', 'pepe@hola.es', 'pepe', '$2y$10$b2DPG1eEwWyulEo9sbWuIeUvfyjp3cv90wq.pmtzR6VTcB1i5qG4S', 'usuario'),
-(9, '12345679r', 'prueba', 'prueba@prueba.com', 'prueba', '$2y$10$8GgmEceM78rMA0BDe8PSf.A.cSYBqfELpgLYv1jNtCa/6Khn5om.a', 'usuario');
+(4, '12345678Z', 'Administrador', 'administrador@calvarrasadeabajo.es', 'admin', '$2y$10$MEf/iqAz6BE2ZRt7fiJoK.EEpeNqlUHS0W4Gokop3qV358z4zkfQq', 'administrador'),
+(5, '45862611O', 'Pepe Hernández Martín', 'pepe.57@gmail.com', 'pepe', '$2y$10$b2DPG1eEwWyulEo9sbWuIeUvfyjp3cv90wq.pmtzR6VTcB1i5qG4S', 'usuario'),
+(10, '75632941S', 'María García González', 'mariagarcia@hotmail.com', 'maria_g', '$2y$10$oS1zCs99lPQmfdOnykusPeSx09bF6dphSGw6jXNZXU4NEY1yMoDDq', 'usuario'),
+(11, '44589625M', 'Juan Pérez García', 'juan_pg@outlook.com', 'juanpg', '$2y$10$oZJDOqcqRL9OjQ8vNiNJlO0VqvTVYrtGnIVZNHruU1v4gVbnNOGp2', 'usuario'),
+(12, '85744968G', 'José Sánchez Rodríguez', 'jose_sanchez@gmail.com', 'josan5', '$2y$10$0V73kWclpUvruLUiHOxy7.xCVGO87yjUYQfiQZ7Pyw4IJaA7tMwZi', 'usuario'),
+(13, '70526954P', 'Sara Hernández García', 'sarah@hotmail.com', 'sara_her', '$2y$10$eZ/L8CG3z5FYfHvzsDdY2uZD7brubeb/y6lu3mYGHHR3bSRFIaqKS', 'usuario'),
+(14, '77125633L', 'Ana Rodríguez González', 'ana_ro_go@gmail.com', 'ana_23', '$2y$10$7JZ3bl0HFfmzV3EzuL27heBLLpNgLxvaBbR.PcQmAn03UVYZBaeIm', 'usuario');
 
 --
 -- Índices para tablas volcadas
@@ -155,25 +171,25 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `instalaciones`
 --
 ALTER TABLE `instalaciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT de la tabla `intervalos`
 --
 ALTER TABLE `intervalos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Restricciones para tablas volcadas

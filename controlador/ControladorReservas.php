@@ -19,6 +19,9 @@
         } 
 
         public function contacto(){ 
+            if(isset($_REQUEST['enviarComentario'])){
+                header('Location: index.php?ctl=contacto');
+            }
             include ('vista/vista_contacto.php');
         }      
 
@@ -139,8 +142,8 @@
                         $error=24;
                     }
 
-                    //compruebo que el nombre no tenga más de 20 caracteres y no tenga números
-                    if(mb_strlen($_REQUEST['nomInstalacion']) <= 20){
+                    //compruebo que el nombre no tenga más de 50 caracteres y no tenga números
+                    if(mb_strlen($_REQUEST['nomInstalacion']) <= 50){
                         if(!is_numeric($_REQUEST['nomInstalacion'])){
                             $nombre_ok=true;
                         }else{
@@ -240,8 +243,8 @@
                         $Ninst_ok=true;
                     }
 
-                    //compruebo que el nombre no tenga más de 20 caracteres y no tenga números
-                    if(mb_strlen($_REQUEST['nuevoNom']) <= 20){
+                    //compruebo que el nombre no tenga más de 50 caracteres y no tenga números
+                    if(mb_strlen($_REQUEST['nuevoNom']) <= 50){
                         if(!is_numeric($_REQUEST['nuevoNom'])){
                             $Nnombre_ok=true;
                         }else{

@@ -38,3 +38,7 @@ for(let i=0;i<estado.length;i++){
         estado[i].style.color="white";
     }
 }
+
+let error = document.querySelector(".errores");
+
+console.log(error.textContent)
