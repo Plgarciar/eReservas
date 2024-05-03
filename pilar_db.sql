@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-05-2024 a las 12:53:31
+-- Tiempo de generación: 03-05-2024 a las 19:25:55
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.1.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `pueblo_datosnueva`
+-- Base de datos: `pilar_db`
 --
 
 -- --------------------------------------------------------
@@ -98,7 +98,11 @@ INSERT INTO `reservas` (`id_reserva`, `id_instalacion`, `id_usuario`, `id_interv
 (26, 5, 5, 1, '2024-04-26', 'rechazada'),
 (32, 5, 5, 1, '2024-05-04', 'aceptada'),
 (39, 15, 10, 7, '2024-05-03', 'pendiente'),
-(40, 4, 10, 2, '2024-05-05', 'pendiente');
+(40, 4, 10, 2, '2024-05-05', 'rechazada'),
+(42, 15, 11, 6, '2024-05-16', 'pendiente'),
+(43, 4, 13, 5, '2024-05-22', 'pendiente'),
+(44, 15, 12, 11, '2024-05-27', 'aceptada'),
+(45, 15, 14, 7, '2024-05-05', 'pendiente');
 
 -- --------------------------------------------------------
 
@@ -127,7 +131,8 @@ INSERT INTO `usuarios` (`id`, `dni`, `nombre`, `email`, `alias`, `clave`, `perfi
 (11, '44589625M', 'Juan Pérez García', 'juan_pg@outlook.com', 'juanpg', '$2y$10$oZJDOqcqRL9OjQ8vNiNJlO0VqvTVYrtGnIVZNHruU1v4gVbnNOGp2', 'usuario'),
 (12, '85744968G', 'José Sánchez Rodríguez', 'jose_sanchez@gmail.com', 'josan5', '$2y$10$0V73kWclpUvruLUiHOxy7.xCVGO87yjUYQfiQZ7Pyw4IJaA7tMwZi', 'usuario'),
 (13, '70526954P', 'Sara Hernández García', 'sarah@hotmail.com', 'sara_her', '$2y$10$eZ/L8CG3z5FYfHvzsDdY2uZD7brubeb/y6lu3mYGHHR3bSRFIaqKS', 'usuario'),
-(14, '77125633L', 'Ana Rodríguez González', 'ana_ro_go@gmail.com', 'ana_23', '$2y$10$7JZ3bl0HFfmzV3EzuL27heBLLpNgLxvaBbR.PcQmAn03UVYZBaeIm', 'usuario');
+(14, '77125633L', 'Ana Rodríguez González', 'ana_ro_go@gmail.com', 'ana_23', '$2y$10$7JZ3bl0HFfmzV3EzuL27heBLLpNgLxvaBbR.PcQmAn03UVYZBaeIm', 'usuario'),
+(16, '45215963T', 'Francisco Sánchez López', 'fran@gmail.com', 'fran', '$2y$10$ih6KdCNskiBnu2LlDLtpr.L8m/db/iyUl4uDhCU/i7/9OSkOhkZiG', 'usuario');
 
 --
 -- Índices para tablas volcadas
@@ -171,7 +176,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `instalaciones`
 --
 ALTER TABLE `instalaciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
 -- AUTO_INCREMENT de la tabla `intervalos`
@@ -183,13 +188,13 @@ ALTER TABLE `intervalos`
 -- AUTO_INCREMENT de la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Restricciones para tablas volcadas

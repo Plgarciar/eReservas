@@ -62,7 +62,7 @@
 </form>
 </table>
 <?php } ?>
-<a class="enlaceP" href="index.php?ctl=operaciones"> &larr; Volver a operaciones</a>
+<p><a class="enlaceP" href="index.php?ctl=operaciones"> &larr; Volver a operaciones</a></p>
 <?php $contenido = ob_get_clean();?>
 
 <?php include 'estructura.php' ;?>

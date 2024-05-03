@@ -22,3 +22,6 @@ usuarios:
 
 -alias:ana_23
 -contraseña:1234
+
+-alias:fran
+-contraseña:1234
