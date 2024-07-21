@@ -32,7 +32,7 @@
         </div>
     </a>
 
-    <a href="index.php?ctl=reservas" class="seccionesInicio">
+    <a href="index.php?ctl=instalaciones" class="seccionesInicio">
         <div>
             <p>Reserva de instalaciones</p>
         </div>

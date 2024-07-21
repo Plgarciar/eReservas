@@ -21,7 +21,6 @@
                 <li><a href="index.php?ctl=registro">Registro</a></li>
                 <li><a href="index.php?ctl=login">Iniciar sesión</a></li>
                 <?php } else if($_SESSION['perfil_usuario']=="usuario"){ ?>
-                <li><a href="index.php?ctl=reservas">Reservas</a></li>
                 <li><a href="index.php?ctl=contacto">Contacto</a></li>
                 <li><a href="#">Mi cuenta</a>
                     <ul class="submenu">

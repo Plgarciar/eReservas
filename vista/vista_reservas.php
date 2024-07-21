@@ -18,7 +18,7 @@
     </select>
 
     <label>Selecciona una fecha</label>
-    <input type="date" name="dia" id="dia" >
+    <input type="date" name="dia" id="dia" min="<?= date("Y-m-d") ?>">
 
     <label>Selecciona una hora</label>
     <select name="seleHora" id="seleHora">
